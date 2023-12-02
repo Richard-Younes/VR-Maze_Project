@@ -1,0 +1,11 @@
+Model Information:
+* title:	Freddy Scary
+* source:	https://sketchfab.com/3d-models/freddy-scary-84f000cc1dac401a928e5b731ed48251
+* author:	RobCraft200 (https://sketchfab.com/RobCraft200)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Freddy Scary" (https://sketchfab.com/3d-models/freddy-scary-84f000cc1dac401a928e5b731ed48251) by RobCraft200 (https://sketchfab.com/RobCraft200) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
