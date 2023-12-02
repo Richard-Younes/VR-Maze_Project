@@ -1,0 +1,11 @@
+#counterDisplay {
+	position: fixed;
+	top: 10px;
+	left: 50%;
+	font-size: 24px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+	color: rgb(255, 0, 0);
+	z-index: 1;
+	transform: translateX(-50%);
+}
