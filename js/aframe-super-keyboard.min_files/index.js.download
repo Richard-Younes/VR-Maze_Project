@@ -1,0 +1,228 @@
+let counter = 1;
+
+AFRAME.registerComponent("enabledarts", {
+  init: function () {
+    var keyboard = document.querySelector("#keyboardDarts");
+    this.el.addEventListener("click", function () {
+      if (counter == 1){
+       keyboard.setAttribute("scale", "1 1 1"); 
+      }
+    });
+  },
+});
+
+AFRAME.registerComponent("listendarts", {
+  init: function () {
+    var keyboard = document.querySelector("#keyboardDarts");
+    var riddle = document.querySelector('#riddle1');
+    this.el.addEventListener("superkeyboardinput", function () {
+        if(parseInt(window.localStorage.getItem("rawVal")) == 121819){
+          keyboard.setAttribute("scale", "0 0 0");
+          riddle.setAttribute("scale", "0.25 0.25 0.25");
+          counter++ //counter becomes 2
+}
+    });
+  },
+});
+
+AFRAME.registerComponent("enableclocks", {
+  init: function () {
+    var keyboard = document.querySelector("#keyboardClocks");
+    var riddle = document.querySelector('#riddle1');
+    this.el.addEventListener("click", function () {
+      if (counter == 2){
+       keyboard.setAttribute("scale", "1 1 1");
+       riddle.setAttribute("scale", "0 0 0");
+      }
+    });
+  },
+});
+
+AFRAME.registerComponent("listenclocks", {
+  init: function () {
+    var keyboard = document.querySelector("#keyboardClocks");
+    var phone = document.querySelector("#phone");
+    this.el.addEventListener("superkeyboardinput", function () {
+        if(parseInt(window.localStorage.getItem("rawVal")) == 8141015){
+          phone.components.sound.playSound();
+          keyboard.setAttribute("scale", "0 0 0");
+          counter++ //counter becomes 3
+}
+    });
+  },
+});
+
+
+
+AFRAME.registerComponent("stopring", {
+  init: function () {
+    var phone = document.querySelector("#phone");
+    var soundBox = document.querySelector("#soundBox");
+    var alphabets = document.querySelector("#alpha");
+    this.el.addEventListener("click", function () {
+      if (counter == 3){
+        phone.components.sound.pauseSound();
+        soundBox.components.sound.playSound();
+        alphabets.setAttribute("scale", "0.5 0.2 0.5");
+      }
+    });
+  },
+});
+
+AFRAME.registerComponent("enablepaint", {
+  init: function () {
+    var keyboard = document.querySelector("#keyboardPainting");
+    var soundBox = document.querySelector("#soundBox");
+    this.el.addEventListener("click", function () {
+      if (counter == 3){
+       keyboard.setAttribute("scale", "1 1 1");
+       soundBox.components.sound.pauseSound();
+      }
+    });
+  },
+});
+
+AFRAME.registerComponent("listenpaint", {
+  init: function () {
+    var keyboard = document.querySelector("#keyboardPainting");
+    var colors = document.querySelector("#colors");
+    var keypad2 = document.querySelector("#keypad2");
+    this.el.addEventListener("superkeyboardinput", function () {
+        if(window.localStorage.getItem("rawVal") == "beksinski"){
+          keyboard.setAttribute("scale", "0 0 0");
+          colors.setAttribute("scale", "1 1 1");
+          keypad2.setAttribute("scale", "0.1 0.1 0.1");
+          counter++ //counter becomes 4
+}
+    });
+  },
+});
+
+AFRAME.registerComponent("enablewardrobe", {
+  init: function () {
+    var keyboard = document.querySelector("#keyboardWardrobe");
+    this.el.addEventListener("click", function () {
+      if (counter == 4){
+       keyboard.setAttribute("scale", "1 1 1");
+      }
+    });
+  },
+});
+
+AFRAME.registerComponent("listenwardrobe", {
+  init: function () {
+    var keyboard = document.querySelector("#keyboardWardrobe");
+    var colors = document.querySelector("#colors");
+    var keypad2 = document.querySelector("#keypad2");
+    var bulb = document.querySelector("#bulb");
+    var mapTrigger = document.querySelector("#mapTrigger");
+    var riddle = document.querySelector("#riddle2")
+    this.el.addEventListener("superkeyboardinput", function () {
+        if(window.localStorage.getItem("rawVal") == 2121999){
+          keyboard.setAttribute("scale", "0 0 0");
+          colors.setAttribute("scale", "0 0 0");
+          riddle.setAttribute("scale", "0.1 0.1 0.1");
+          mapTrigger.setAttribute("scale", "0.5 0.5 0.5");
+          counter++  //counter becomes 5 
+}
+    });
+  },
+});
+
+AFRAME.registerComponent("enablemap", {
+  init: function () {
+    var map = document.querySelector("#map");
+    var BOOK = document.querySelector("#BOOK");
+    var riddle = document.querySelector("#riddle2");
+    var giveBook = document.querySelector("#giveBook");
+    this.el.addEventListener("click", function () {
+      if (counter == 5){
+        map.setAttribute("scale", "0.4 0.32 0.4");
+        BOOK.setAttribute("scale", "0.2 0.3 0.3");
+        riddle.setAttribute("scale", "0 0 0");
+        giveBook.setAttribute("position", "2.91 1.47 2");
+        counter++  //counter becomes 6
+      }
+    });
+  },
+});
+
+AFRAME.registerComponent("givebook", {
+  init: function () {
+    var map = document.querySelector("#map");
+    var BOOK = document.querySelector("#BOOK");
+    var keybook = document.querySelector("#keybook");
+    var bulb = document.querySelector("#bulb");
+    var giveBook = document.querySelector("#giveBook");
+    this.el.addEventListener("click", function () {
+      if (counter == 6){
+        map.setAttribute("scale", "0 0 0");
+        BOOK.setAttribute("scale", "0 0 0");
+        keybook.setAttribute("scale", "0.25 0.25 0.25");
+        giveBook.setAttribute("position", "2.92 1.47 2");
+        counter++ //counter becomes 7
+      }
+    });
+  },
+});
+
+AFRAME.registerComponent("bookpress", {
+  init: function () {
+    var finalKeyboard = document.querySelector("#finalKeyboard");
+    var keybook = document.querySelector("#keybook");
+    var braille = document.querySelector("#braille");
+    this.el.addEventListener("click", function () {
+      if (counter == 7){
+        keybook.setAttribute("scale", "0 0 0");
+        finalKeyboard.setAttribute("scale", "1 1 1");
+        braille.setAttribute("scale", "0.4 0.2 0.4");
+        counter++ //counter becomes 8
+      }
+    });
+  },
+});
+
+AFRAME.registerComponent("listenfinal", {
+  init: function () {
+    var keyboard = document.querySelector("#finalKeyboard");
+    var bookWithKey = document.querySelector("#bookWithKey");
+    var braille = document.querySelector("#braille");
+    var button = document.querySelector("#boogie");
+    this.el.addEventListener("superkeyboardinput", function () {
+        if(window.localStorage.getItem("rawVal") == "alchemia" || window.localStorage.getItem("rawVal") == "ALCHEMIA"){
+          keyboard.setAttribute("scale", "0 0 0");
+          bookWithKey.setAttribute("scale", "0.1 0.1 0.1");
+          braille.setAttribute("scale", "0 0 0");
+          button.setAttribute("scale", "0.2 0.2 0.2");
+          counter++  //counter becomes 9 
+}
+    });
+  },
+});
+
+AFRAME.registerComponent("end", {
+  init: function () {
+    var player = document.querySelector("#player");
+    this.el.addEventListener("click", function () {
+      if (counter == 9){
+        player.setAttribute("position","0 25 0")
+      }
+    });
+  },
+});
+
+AFRAME.registerComponent("playagain", {
+  init: function () {
+    var player = document.querySelector("#player");
+    var bookWithKey = document.querySelector("#bookWithKey");
+    var button = document.querySelector("#boogie");
+    this.el.addEventListener("click", function () {
+      if (counter == 9){
+        counter = 1;
+        player.setAttribute("position","0 0 0");
+        button.setAttribute("scale", "0 0 0");
+        bookWithKey.setAttribute("scale", "0 0 0");
+      }
+    });
+  },
+});
