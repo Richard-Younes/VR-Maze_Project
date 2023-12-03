@@ -8,14 +8,14 @@
 
 		<link rel="stylesheet" href="./style.css" />
 
-		<script src="js/aframe-master.1.0.4.min.js"></script>
-		<script src="js/aframe-extras.min.js"></script>
-		<script src="js/aframe-physics-system.min.js"></script>
-		<script src="js/aframe-spe-particles-component.js "></script>
-		<script src="js/aframe-spritesheet-animation.js"></script>
-		<script src="js/aframe-environment-component.min.js"></script>
+		<script src="./js/aframe-master.1.0.4.min.js"></script>
+		<script src="./js/aframe-extras.min.js"></script>
+		<script src="./js/aframe-physics-system.min.js"></script>
+		<script src="./js/aframe-spe-particles-component.js "></script>
+		<script src="./js/aframe-spritesheet-animation.js"></script>
+		<script src="./js/aframe-environment-component.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/aframe-event-set-component@4.0.1/dist/aframe-event-set-component.min.js"></script>
-		<script src="js/keyboard.js"></script>
+		<script src="./js/keyboard.js"></script>
 		<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
 
 		<title>Document</title>
@@ -23,10 +23,10 @@
 
 	<body>
 		<a-asset>
-			<img src="images/normal-map-ground2.png" id="normal-map-ground" />
+			<img src="./images/normal-map-ground2.png" id="normal-map-ground" />
 			<a-asset-item id="fireBall" src="./asset/fireball__energy_sphere/scene.gltf"></a-asset-item>
-			<a-asset-item id="cage" src="asset/coal_mine_cage.glb"></a-asset-item>
-			<a-asset-item id="controlpanel" src="asset/access_control_panel_signaling.glb"></a-asset-item>
+			<a-asset-item id="cage" src="./asset/coal_mine_cage.glb"></a-asset-item>
+			<a-asset-item id="controlpanel" src="./asset/access_control_panel_signaling.glb"></a-asset-item>
 
 			<a-asset-item id="Ghost" src="./asset/ghost/scene.gltf"></a-asset-item>
 			<a-asset-item id="Monster" src="./asset/monster/scene.gltf"></a-asset-item>
@@ -122,19 +122,19 @@
 			<!-- Code for the sky -->
 			<a-entity position="100 -70 -100" environment="preset:starry;"></a-entity>
 
-			<a-box position="0 2.5 10" rotation="0 0 0" width="5" height="5" depth="5" src="images/walls1.jpeg" static-body> </a-box>
-			<a-box position="0 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="images/walls1.jpeg" static-body> </a-box>
-			<a-box position="0 2.5 15" rotation="0 0 0" width="5" height="5" depth="5" src="images/walls1.jpeg" static-body> </a-box>
-			<a-box position="10 2.5 15" rotation="0 0 0" width="5" height="5" depth="5" src="images/walls1.jpeg" static-body> </a-box>
-			<a-box position="5 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="images/walls1.jpeg" static-body> </a-box>
-			<a-box position="0 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="images/walls1.jpeg" static-body> </a-box>
-			<a-box position="10 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="images/walls1.jpeg" static-body> </a-box>
-			<a-box position="0 2.5 5" rotation="0 0 0" width="5" height="5" depth="5" src="images/walls1.jpeg" static-body> </a-box>
-			<a-box position="10 2.5 5" rotation="0 0 0" width="5" height="5" depth="5" src="images/walls1.jpeg" static-body> </a-box>
-			<a-box position="10 2.5 10" rotation="0 0 0" width="5" height="5" depth="5" src="images/walls1.jpeg" static-body> </a-box>
+			<a-box position="0 2.5 10" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+			<a-box position="0 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+			<a-box position="0 2.5 15" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+			<a-box position="10 2.5 15" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+			<a-box position="5 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+			<a-box position="0 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+			<a-box position="10 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+			<a-box position="0 2.5 5" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+			<a-box position="10 2.5 5" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+			<a-box position="10 2.5 10" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
 
 			<!--the control panel-->
-			<a-box id="myBox" position="5 2.5 0" width="5" height="5" depth="5" src="images/walls1.jpeg" static-body> </a-box>
+			<a-box id="myBox" position="5 2.5 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
 			<a-entity
 				id="controlPanel"
 				gltf-model="#controlpanel"
@@ -209,9 +209,9 @@
 
 			<a-entity gltf-model="#Headless" position="5.5 0 4" scale="0.1 0.1 0.1" rotation="0 0 0"></a-entity>
 
-			<a-box id="myBox2" position="70 2.5 -15" width="5" height="5" depth="5" src="images/walls1.jpeg" static-body> </a-box>
+			<a-box id="myBox2" position="70 2.5 -15" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
 
-			<a-box id="myBox3" position="85 7.5 -15" width="5" height="5" depth="5" src="images/walls1.jpeg" visible="false" static-body> </a-box>
+			<a-box id="myBox3" position="85 7.5 -15" width="5" height="5" depth="5" src="./images/walls1.jpeg" visible="false" static-body> </a-box>
 
 			<a-entity
 				gltf-model="#Panel"
@@ -365,30 +365,30 @@
 				event-set__click="_event: click; _target: #myBox5; position: 15 7.5 -80"
 				static-body
 			></a-entity>
-			<a-box id="myBox5" position="5 2.5 -80" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox5" position="5 2.5 -80" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
 			<a-entity gltf-model="#Panel" position="5 0 -87.5" scale="0.05 0.05 0.05" rotation="0 -90 0" onclick="moveBoxes()"></a-entity>
 
 			<!-- Boxes when panel is pressed -->
 
-			<a-box id="myBox6" position="10 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox6" position="10 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
-			<a-box id="myBox7" position="15 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox7" position="15 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
-			<a-box id="myBox8" position="20 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox8" position="20 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
-			<a-box id="myBox9" position="25 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox9" position="25 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
-			<a-box id="myBox10" position="30 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox10" position="30 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
-			<a-box id="myBox11" position="35 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox12" position="40 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox13" position="45 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox14" position="50 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox15" position="55 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox16" position="60 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox17" position="65 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox18" position="70 7.5 -85" width="5" height="5" depth="5" src="images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox11" position="35 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox12" position="40 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox13" position="45 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox14" position="50 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox15" position="55 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox16" position="60 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox17" position="65 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+			<a-box id="myBox18" position="70 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 		</a-scene>
 
 		<script src="./js/index.js "></script>
