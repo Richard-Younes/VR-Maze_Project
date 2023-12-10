@@ -45,15 +45,19 @@
 		</a-asset>
 		<div id="counterDisplay"></div>
 
-		<a-scene>
+		<div id="player-lives">
+			<p id="player-lives-display"></p>
+		</div>
+
+		<a-scene physics=" gravity:-5">
 			<!-- physics=" gravity:-5" -->
 			<!-- <a-entity rotation="-90 0 0 " position=" 5 20 5 ">
-            <a-camera></a-camera>
-        </a-entity> -->
+				<a-camera></a-camera>
+			</a-entity> -->
 
 			<a-entity id="cage" gltf-model="#cage" kinematic-body position="5 40 15"> </a-entity>
 
-			<a-entity id="player" camera universal-controls look-controls wasd-controls="acceleration:100" velocity="0 0 0" position="5 20 -85">
+			<a-entity id="player" kinematic-body camera universal-controls look-controls wasd-controls="acceleration:30" velocity="0 0 0" position="5 40 15">
 				<!-- position 5 40 15   acceleration:30 kinematic-body-->
 				<a-entity
 					cursor
@@ -169,16 +173,16 @@
 				animation__rotation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"
 			></a-entity>
 
-			<a-entity
+			<!-- <a-entity
 				gltf-model="#Monster"
 				position="27 2.5 -5"
 				scale="1 1 1"
 				rotation="0 -90 0"
 				sound="src: url(Sound/Jigsaw_laugh.mp3); autoplay: true; loop:true; volume:0.2"
 				static-body
-			></a-entity>
+			></a-entity> -->
 
-			<a-entity gltf-model="#Freddy" position="5 0 -35" scale="1 1 1" rotation="0 0 0" sound="src: url(Sound/Freddy.mp3); autoplay: true; loop:true; volume:0.2" static-body></a-entity>
+			<!-- <a-entity gltf-model="#Freddy" position="5 0 -35" scale="1 1 1" rotation="0 0 0" sound="src: url(Sound/Freddy.mp3); autoplay: true; loop:true; volume:0.2" static-body></a-entity> -->
 
 			<a-text value="Right this time?" color="white" align="center" position="5 2.5 -35" font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
 
