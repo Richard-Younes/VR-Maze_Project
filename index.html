@@ -20,542 +20,581 @@
 				document.getElementById('loading-overlay').style.display = 'none';
 			}, 5000); // Replace 3000 with the actual loading time in milliseconds
 		</script>
+		<script>
+			// Function to show the game over screen
+
+			// Function to restart the game
+			function restartGame() {
+				document.querySelector('.game-over').style.display = 'none';
+				document.querySelector('.game-container').style.display = 'block';
+				// Additional logic to reset game state if needed
+				location.reload(true);
+			}
+		</script>
+
 		<title>MAZE</title>
 	</head>
 
 	<body>
-		<!-- Loading Overlay -->
-		<div id="loading-overlay">Loading...</div>
+		<div class="game-container">
+			<!-- Loading Overlay -->
+			<div id="loading-overlay">Loading...</div>
 
-		<a-asset>
-			<img src="./images/normal-map-ground2.png" id="normal-map-ground" />
-			<a-asset-item id="fireBall" src="./asset/fireball__energy_sphere/scene.gltf"></a-asset-item>
-			<a-asset-item id="cage" src="./asset/coal_mine_cage.glb"></a-asset-item>
-			<a-asset-item id="controlpanel" src="./asset/access_control_panel_signaling.glb"></a-asset-item>
+			<a-asset>
+				<img src="./images/normal-map-ground2.png" id="normal-map-ground" />
+				<a-asset-item id="fireBall" src="./asset/fireball__energy_sphere/scene.gltf"></a-asset-item>
+				<a-asset-item id="cage" src="./asset/coal_mine_cage.glb"></a-asset-item>
+				<a-asset-item id="controlpanel" src="./asset/access_control_panel_signaling.glb"></a-asset-item>
 
-			<a-asset-item id="Ghost" src="./asset/ghost/scene.gltf"></a-asset-item>
-			<a-asset-item id="Monster" src="./asset/monster/scene.gltf"></a-asset-item>
-			<a-asset-item id="Freddy" src="./asset/freddy_scary/scene.gltf"></a-asset-item>
-			<a-asset-item id="Ghost2" src="./asset/scary_halloween_ghost/scene.gltf"></a-asset-item>
-			<a-asset-item id="Boo" src="./asset/boo_but_scary/scene.gltf"></a-asset-item>
-			<a-asset-item id="Text" src="./asset/blank_canvas/scene.gltf"></a-asset-item>
-			<a-asset-item id="Headless" src="./asset/headless_siren_head/scene.gltf"></a-asset-item>
-			<a-asset-item id="Panel" src="./asset/control_panel/scene.gltf"></a-asset-item>
-			<a-asset-item id="ScaryFace" src="./asset/scary_face/scene.gltf"></a-asset-item>
-			<a-asset-item id="Word" src="./asset/bubble_speech/scene.gltf"></a-asset-item>
-			<a-asset-item id="End" src="./asset/a_cool_little_cup_just_for_fun/scene.gltf"></a-asset-item>
-			<a-asset-item id="Torch" src="./asset/torch/scene.gltf"></a-asset-item>
+				<a-asset-item id="Ghost" src="./asset/ghost/scene.gltf"></a-asset-item>
+				<a-asset-item id="Monster" src="./asset/monster/scene.gltf"></a-asset-item>
+				<a-asset-item id="Freddy" src="./asset/freddy_scary/scene.gltf"></a-asset-item>
+				<a-asset-item id="Ghost2" src="./asset/scary_halloween_ghost/scene.gltf"></a-asset-item>
+				<a-asset-item id="Boo" src="./asset/boo_but_scary/scene.gltf"></a-asset-item>
+				<a-asset-item id="Text" src="./asset/blank_canvas/scene.gltf"></a-asset-item>
+				<a-asset-item id="Headless" src="./asset/headless_siren_head/scene.gltf"></a-asset-item>
+				<a-asset-item id="Panel" src="./asset/control_panel/scene.gltf"></a-asset-item>
+				<a-asset-item id="ScaryFace" src="./asset/scary_face/scene.gltf"></a-asset-item>
+				<a-asset-item id="Word" src="./asset/bubble_speech/scene.gltf"></a-asset-item>
+				<a-asset-item id="End" src="./asset/a_cool_little_cup_just_for_fun/scene.gltf"></a-asset-item>
+				<a-asset-item id="Torch" src="./asset/torch/scene.gltf"></a-asset-item>
 
-			<a-asset-item id="Fiddlestick" src="./asset/fiddlesticks_league_of_legends_character/scene.gltf"></a-asset-item>
-		</a-asset>
-		<div id="counterDisplay"></div>
+				<a-asset-item id="Fiddlestick" src="./asset/fiddlesticks_league_of_legends_character/scene.gltf"></a-asset-item>
+			</a-asset>
 
-		<div id="player-lives">
-			<p id="player-lives-display"></p>
-		</div>
+			<div id="player-lives">
+				<p id="player-lives-display">&nbsp;</p>
+				<p id="counterDisplay">&nbsp;</p>
+			</div>
 
-		<a-scene physics=" gravity:-5">
-			<!-- physics=" gravity:-5" -->
-			<!-- <a-entity rotation="-90 0 0 " position=" 5 20 5 ">
+			<a-scene physics=" gravity:-5">
+				<!-- physics=" gravity:-5" -->
+				<!-- <a-entity rotation="-90 0 0 " position=" 5 20 5 ">
 				<a-camera></a-camera>
 			</a-entity> -->
 
-			<!-- Collision detector entity (invisible) -->
-			<a-box id="collision-detector" position="0 0 0" scale="0.1 0.1 0.1" visible="false" static-body collision-detector></a-box>
+				<!-- Collision detector entity (invisible) -->
+				<a-box id="collision-detector" position="0 0 0" scale="0.1 0.1 0.1" visible="false" static-body collision-detector></a-box>
 
-			<a-entity id="cage" gltf-model="#cage" kinematic-body position="5 40 15"> </a-entity>
+				<a-entity id="cage" gltf-model="#cage" kinematic-body position="5 40 15"> </a-entity>
 
-			<a-entity class="player" id="player" camera universal-controls look-controls wasd-controls="acceleration:30" velocity="0 0 0" position="5 40 15" collidable kinematic-body>
-				<!-- position 5 40 15   acceleration:30 kinematic-body-->
-				<a-entity
-					cursor
-					position="0 0 -1"
-					geometry="primitive: sphere; radius: 0.008;"
-					material="color: beige; shader:flat; opacity:0.8"
-					animation__click="property:scale;
+				<a-entity class="player" id="player" camera universal-controls look-controls wasd-controls="acceleration:30" velocity="0 0 0" position="5 40 15" collidable kinematic-body>
+					<!-- position 5 40 15   acceleration:30 kinematic-body-->
+					<a-entity
+						cursor
+						position="0 0 -1"
+						geometry="primitive: sphere; radius: 0.008;"
+						material="color: beige; shader:flat; opacity:0.8"
+						animation__click="property:scale;
                                 startEvents: click;
                                 easing: ;
                                 dur: 150;
                                 from: 0.1 0.1 0.1; to: 1 1 1;"
-					animation__fusing="property: scale; 
+						animation__fusing="property: scale; 
                                 startEvents: fusing; 
                                 easing: easeInCubic; 
                                 dur: 1500; 
                                 from: 1 1 1; to: 3 3 3"
-				>
-				</a-entity>
+					>
+					</a-entity>
 
-				<!-- <a-entity
+					<!-- <a-entity
 				sound="src: url(Sound/PinkPantherTheme.mp3); autoplay: true; loop:true; distanceModel:linear"
 			>
 			</a-entity> -->
 
-				<a-sphere class="head" visible="false" random-color></a-sphere>
-				<!-- Add a point light as a child of the camera -->
-				<a-entity light="type: point; intensity: 2; distance: 4" position="0 1 -2"></a-entity>
-			</a-entity>
+					<a-sphere class="head" visible="false" random-color></a-sphere>
+					<!-- Add a point light as a child of the camera -->
+					<a-entity light="type: point; intensity: 2; distance: 4" position="0 1 -2"></a-entity>
+				</a-entity>
 
-			<a-plane
-				static-body
-				color="#999 "
-				side="double "
-				position="100 0 -100 "
-				rotation="-90 0 0 "
-				width="205 "
-				height="205 "
-				src="./images/ground5.jpeg "
-				repeat="100 100 "
-				normal-map:
-				#normal-map-ground;
-				normal-texture-repeat:80
-				80;
-				static-body
-			></a-plane>
-			<a-plane static-body visible="false" rotation="-90 0 0 " position="100 2 -100 " width="205 " height="205 " depth="20 " rotation="0 0 0 "></a-plane>
+				<a-plane
+					static-body
+					color="#999 "
+					side="double "
+					position="100 0 -100 "
+					rotation="-90 0 0 "
+					width="205 "
+					height="205 "
+					src="./images/ground5.jpeg "
+					repeat="100 100 "
+					normal-map:
+					#normal-map-ground;
+					normal-texture-repeat:80
+					80;
+					static-body
+				></a-plane>
+				<a-plane static-body visible="false" rotation="-90 0 0 " position="100 2 -100 " width="205 " height="205 " depth="20 " rotation="0 0 0 "></a-plane>
 
-			<a-plane
-				static-body
-				color="#999 "
-				side="double "
-				position="5 0 12.5 "
-				rotation="-90 0 0 "
-				width="20"
-				height="20"
-				src="./images/ground5.jpeg "
-				repeat="5 5"
-				normal-map:
-				#normal-map-ground;
-				normal-texture-repeat:80
-				80;
-				static-body
-			></a-plane>
-			<a-plane static-body visible="false" rotation="-90 0 0 " position="5 2 12.5 " width="40 " height="40" rotation="0 0 0 "></a-plane>
+				<a-plane
+					static-body
+					color="#999 "
+					side="double "
+					position="5 0 12.5 "
+					rotation="-90 0 0 "
+					width="20"
+					height="20"
+					src="./images/ground5.jpeg "
+					repeat="5 5"
+					normal-map:
+					#normal-map-ground;
+					normal-texture-repeat:80
+					80;
+					static-body
+				></a-plane>
+				<a-plane static-body visible="false" rotation="-90 0 0 " position="5 2 12.5 " width="40 " height="40" rotation="0 0 0 "></a-plane>
 
-			<!-- Code for the sky -->
-			<a-entity position="100 -70 -100" environment="preset:starry;"></a-entity>
+				<!-- Code for the sky -->
+				<a-entity position="100 -70 -100" environment="preset:starry;"></a-entity>
 
-			<a-box position="0 2.5 10" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
-			<a-box position="0 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
-			<a-box position="0 2.5 15" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
-			<a-box position="10 2.5 15" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
-			<a-box position="5 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
-			<a-box position="0 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
-			<a-box position="10 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
-			<a-box position="0 2.5 5" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
-			<a-box position="10 2.5 5" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
-			<a-box position="10 2.5 10" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+				<a-box position="0 2.5 10" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+				<a-box position="0 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+				<a-box position="0 2.5 15" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+				<a-box position="10 2.5 15" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+				<a-box position="5 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+				<a-box position="0 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+				<a-box position="10 2.5 20" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+				<a-box position="0 2.5 5" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+				<a-box position="10 2.5 5" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+				<a-box position="10 2.5 10" rotation="0 0 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
 
-			<!--the control panel-->
-			<a-box id="myBox" position="5 2.5 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
-			<a-entity
-				id="controlPanel"
-				gltf-model="#controlpanel"
-				kinematic-body
-				position="9.5 0.5 3.5"
-				scale="0.2 0.2 0.2"
-				rotation="0 180 0"
-				event-set__click="_event: click; _target: #myBox; position: 5 7.5 0"
-			>
-			</a-entity>
+				<!--the control panel-->
+				<a-box id="myBox" position="5 2.5 0" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+				<a-entity
+					id="controlPanel"
+					gltf-model="#controlpanel"
+					kinematic-body
+					position="9.5 0.5 3.5"
+					scale="0.2 0.2 0.2"
+					rotation="0 180 0"
+					event-set__click="_event: click; _target: #myBox; position: 5 7.5 0"
+				>
+				</a-entity>
 
-			<a-text value="LEFT or right? Choose the right path" color="white" align="center" position="5 7.5 -7.5" font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
+				<a-text value="LEFT or right? Choose the right path" color="white" align="center" position="5 7.5 -7.5" font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
 
-			<a-entity
-				gltf-model="#Ghost"
-				position="5 10 -7.5"
-				scale="0.02 0.02 0.02"
-				rotation="0 0 0"
-				animation__rotation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"
-			></a-entity>
+				<a-entity
+					gltf-model="#Ghost"
+					position="5 10 -7.5"
+					scale="0.02 0.02 0.02"
+					rotation="0 0 0"
+					animation__rotation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"
+				></a-entity>
 
-			<a-entity gltf-model="#Monster" position="27 2.5 -5" scale="1 1 1" rotation="0 -90 0" sound="src: url(Sound/Jigsaw_laugh.mp); autoplay: true; loop:true; volume:0.2" static-body></a-entity>
+				<a-entity
+					gltf-model="#Monster"
+					position="27 2.5 -5"
+					scale="1 1 1"
+					rotation="0 -90 0"
+					sound="src: url(Sound/Jigsaw_laugh.mp); autoplay: true; loop:true; volume:0.2"
+					static-body
+				></a-entity>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Freddy"
-				position="15 0 -35"
-				scale="1 1 1"
-				rotation="0 0 0"
-				sound="src: url(Sound/Freddy.mp); autoplay: true; loop:true; volume:0.2"
-				animation="property: position; 
+				<a-entity
+					class="ghost"
+					gltf-model="#Freddy"
+					position="15 0 -35"
+					scale="1 1 1"
+					rotation="0 0 0"
+					sound="src: url(Sound/Freddy.mp); autoplay: true; loop:true; volume:0.2"
+					animation="property: position; 
 to: 15 0 -15; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
 loop: true"
-			></a-entity>
+				></a-entity>
 
-			<a-text value="Right this time?" color="white" align="center" position="5 7.5 -35" font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
+				<a-text value="Right this time?" color="white" align="center" position="5 7.5 -35" font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
 
-			<a-entity gltf-model="#Text" position="7.5 4.1 4" scale="2 5 2" rotation="0 0 90"></a-entity>
+				<a-entity gltf-model="#Text" position="7.5 4.1 4" scale="2 5 2" rotation="0 0 90"></a-entity>
 
-			<a-text
-				id="welcomeText"
-				value="Hello and Welcome to the Maze Escape Game. The rules are simple, just get to the finish line with the minimum time. Be careful on your way"
-				wrap-count="40"
-				position="5.2 4.1 4.2"
-				align="center"
-				color="black"
-				scale="0.75 0.75 0.75"
-			>
-			</a-text>
+				<a-text
+					id="welcomeText"
+					value="Hello and Welcome to the Maze Escape Game. The rules are simple, just get to the finish line with the minimum time. Be careful on your way"
+					wrap-count="40"
+					position="5.2 4.1 4.2"
+					align="center"
+					color="black"
+					scale="0.75 0.75 0.75"
+				>
+				</a-text>
 
-			<a-entity class="ghost" gltf-model="#Headless" position="6 0 4" scale="0.1 0.1 0.1" rotation="0 0 0"></a-entity>
-			<a-box id="myBox2" position="70 2.5 -15" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
+				<a-entity class="ghost" gltf-model="#Headless" position="6 0 4" scale="0.1 0.1 0.1" rotation="0 0 0"></a-entity>
+				<a-box id="myBox2" position="70 2.5 -15" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
 
-			<a-box id="myBox3" position="85 7.5 -15" width="5" height="5" depth="5" src="./images/walls1.jpeg" visible="false" static-body> </a-box>
+				<a-box id="myBox3" position="85 7.5 -15" width="5" height="5" depth="5" src="./images/walls1.jpeg" visible="false" static-body> </a-box>
 
-			<a-entity
-				gltf-model="#Panel"
-				position="77.5 0 -17.5"
-				scale="0.05 0.05 0.05"
-				rotation="0 -90 0"
-				event-set__click="_event: click; _target: #myBox2; position: 70 7.5 -15"
-				event-set__click__2="_event: click; _target: #myBox3; position: 85 2.5 -15; visible: true"
-			></a-entity>
+				<a-entity
+					gltf-model="#Panel"
+					position="77.5 0 -17.5"
+					scale="0.05 0.05 0.05"
+					rotation="0 -90 0"
+					event-set__click="_event: click; _target: #myBox2; position: 70 7.5 -15"
+					event-set__click__2="_event: click; _target: #myBox3; position: 85 2.5 -15; visible: true"
+				></a-entity>
 
-			<!-- Animation for the first entity -->
-			<a-entity id="Word" gltf-model="#Word" position="63 4.5 -16.5" scale="1 1 1" rotation="90 90 0" visible="false"></a-entity>
+				<!-- Animation for the first entity -->
+				<a-entity id="Word" gltf-model="#Word" position="63 4.5 -16.5" scale="1 1 1" rotation="90 90 0" visible="false"></a-entity>
 
-			<!-- Animation for the second entity -->
-			<a-entity
-				gltf-model="#ScaryFace"
-				position="63.4 3 -15"
-				scale="30 30 30"
-				rotation="0 90 0"
-				animation__updown2="property: position; dir: alternate; dur: 2000; easing: linear; loop: true; to: 63 3.5 -15"
-				event-set__enter="_event:mouseenter; _target: #BehindYou; visible: true"
-				event-set__enter2="_event:mouseenter; _target: #Word; visible: true"
-				event-set__leave="_event:mouseleave; _target: #BehindYou; visible: false"
-				event-set__leave2="_event:mouseleave; _target: #Word; visible: false"
-			></a-entity>
+				<!-- Animation for the second entity -->
+				<a-entity
+					gltf-model="#ScaryFace"
+					position="63.4 3 -15"
+					scale="30 30 30"
+					rotation="0 90 0"
+					animation__updown2="property: position; dir: alternate; dur: 2000; easing: linear; loop: true; to: 63 3.5 -15"
+					event-set__enter="_event:mouseenter; _target: #BehindYou; visible: true"
+					event-set__enter2="_event:mouseenter; _target: #Word; visible: true"
+					event-set__leave="_event:mouseleave; _target: #BehindYou; visible: false"
+					event-set__leave2="_event:mouseleave; _target: #Word; visible: false"
+				></a-entity>
 
-			<a-text
-				id="BehindYou"
-				value="Look behind you.
+				<a-text
+					id="BehindYou"
+					value="Look behind you.
     You're trapped!"
-				align="center"
-				rotation="0 90 0"
-				position="63.3 4.5 -16.5"
-				color="black"
-				scale="1.3 1.3 1.3"
-				visible="false"
-			></a-text>
+					align="center"
+					rotation="0 90 0"
+					position="63.3 4.5 -16.5"
+					color="black"
+					scale="1.3 1.3 1.3"
+					visible="false"
+				></a-text>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="60 8 -10"
-				scale="0.02 0.02 0.02"
-				rotation="0 0 0"
-				animation="property: position;  
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="60 8 -10"
+					scale="0.02 0.02 0.02"
+					rotation="0 0 0"
+					animation="property: position;  
     to: 60 8 -60; 
     dur: 6000;
     dir: alternate;
     easing: linear; 
     loop: true"
-				static-body
-			>
-			</a-entity>
+					static-body
+				>
+				</a-entity>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="60 8 -10"
-				scale="0.02 0.02 0.02"
-				rotation="0 0 0"
-				animation="property: position;  
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="60 8 -10"
+					scale="0.02 0.02 0.02"
+					rotation="0 0 0"
+					animation="property: position;  
     to: 100 8 -10; 
     dur: 6000;
     dir: alternate;
     easing: linear; 
     loop: true"
-				static-body
-			>
-			</a-entity>
+					static-body
+				>
+				</a-entity>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="0 8 0"
-				scale="0.02 0.02 0.02"
-				rotation="0 0 0"
-				animation="property: position;  
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="0 8 0"
+					scale="0.02 0.02 0.02"
+					rotation="0 0 0"
+					animation="property: position;  
     to: 200 8 0; 
     dur: 6000;
     dir: alternate;
     easing: linear; 
     loop: true"
-				static-body
-			>
-			</a-entity>
+					static-body
+				>
+				</a-entity>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="200 8 0"
-				scale="0.02 0.02 0.02"
-				rotation="0 90 0"
-				animation="property: position;  
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="200 8 0"
+					scale="0.02 0.02 0.02"
+					rotation="0 90 0"
+					animation="property: position;  
     to: 200 8 -200; 
     dur: 6000;
     dir: alternate;
     easing: linear; 
     loop: true"
-				static-body
-			>
-			</a-entity>
+					static-body
+				>
+				</a-entity>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="200 8 -200"
-				scale="0.02 0.02 0.02"
-				rotation="0 180 0"
-				animation="property: position;  
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="200 8 -200"
+					scale="0.02 0.02 0.02"
+					rotation="0 180 0"
+					animation="property: position;  
     to: 0 8 -200; 
     dur: 6000;
     dir: alternate;
     easing: linear; 
     loop: true"
-				static-body
-			>
-			</a-entity>
+					static-body
+				>
+				</a-entity>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="0 8 -200"
-				scale="0.02 0.02 0.02"
-				rotation="0 270 0"
-				animation="property: position; 
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="0 8 -200"
+					scale="0.02 0.02 0.02"
+					rotation="0 270 0"
+					animation="property: position; 
     to: 0 8 0; 
     dur: 6000;
     dir: alternate;
     easing: linear; 
     loop: true"
-				static-body
-			>
-			</a-entity>
+					static-body
+				>
+				</a-entity>
 
-			<a-entity
-				gltf-model="#End"
-				position="85 2 -105"
-				scale="1 1 1"
-				rotation="0 0 0"
-				stop-counter
-				animation__rotation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"
-				static-body
-			></a-entity>
+				<a-entity
+					gltf-model="#End"
+					position="85 2 -105"
+					scale="1 1 1"
+					rotation="0 0 0"
+					stop-counter
+					animation__rotation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"
+					static-body
+				></a-entity>
 
-			<a-cylinder position="85 2 -105" radius="2" height="1000" color="gold" opacity="0.8" material="emissive: gold; emissiveIntensity: 1500" shadow="cast: true; receive: true"> </a-cylinder>
+				<a-cylinder position="85 2 -105" radius="2" height="1000" color="gold" opacity="0.8" material="emissive: gold; emissiveIntensity: 1500" shadow="cast: true; receive: true">
+				</a-cylinder>
 
-			<a-entity gltf-model="#Torch" position="62.5 3.5 -20" scale="1 1 1" rotation="0 90 0" light="type: point; intensity: 2; color: #ffcc00; distance: 10; decay: 2" static-body></a-entity>
+				<a-entity gltf-model="#Torch" position="62.5 3.5 -20" scale="1 1 1" rotation="0 90 0" light="type: point; intensity: 2; color: #ffcc00; distance: 10; decay: 2" static-body></a-entity>
 
-			<a-entity gltf-model="#Torch" position="75 3.5 -37.5" scale="1 1 1" rotation="0 0 0" light="type: point; intensity: 2; color: #ffcc00; distance: 10; decay: 2" static-body></a-entity>
+				<a-entity gltf-model="#Torch" position="75 3.5 -37.5" scale="1 1 1" rotation="0 0 0" light="type: point; intensity: 2; color: #ffcc00; distance: 10; decay: 2" static-body></a-entity>
 
-			<a-entity
-				gltf-model="#Fiddlestick"
-				position="10 5 -80"
-				scale="2 2 2"
-				rotation="0 0 0"
-				light="type: point; intensity: 2; color: #ffcc00; distance: 10; decay: 2"
-				event-set__click="_event: click; _target: #myBox5; position: 15 7.5 -80"
-				static-body
-			></a-entity>
-			<a-box id="myBox5" position="5 2.5 -80" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-entity
+					gltf-model="#Fiddlestick"
+					position="10 5 -80"
+					scale="2 2 2"
+					rotation="0 0 0"
+					light="type: point; intensity: 2; color: #ffcc00; distance: 10; decay: 2"
+					event-set__click="_event: click; _target: #myBox5; position: 15 7.5 -80"
+					static-body
+				></a-entity>
+				<a-box id="myBox5" position="5 2.5 -80" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
-			<a-entity gltf-model="#Panel" position="5 0 -87.5" scale="0.05 0.05 0.05" rotation="0 -90 0" onclick="moveBoxes()"></a-entity>
+				<a-entity gltf-model="#Panel" position="5 0 -87.5" scale="0.05 0.05 0.05" rotation="0 -90 0" onclick="moveBoxes()"></a-entity>
 
-			<!-- Boxes when panel is pressed -->
+				<!-- Boxes when panel is pressed -->
 
-			<a-box id="myBox6" position="10 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox6" position="10 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
-			<a-box id="myBox7" position="15 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox7" position="15 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
-			<a-box id="myBox8" position="20 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox8" position="20 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
-			<a-box id="myBox9" position="25 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox9" position="25 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
-			<a-box id="myBox10" position="30 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox10" position="30 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
-			<a-box id="myBox11" position="35 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox12" position="40 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox13" position="45 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox14" position="50 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox15" position="55 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox16" position="60 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox17" position="65 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
-			<a-box id="myBox18" position="70 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox11" position="35 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox12" position="40 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox13" position="45 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox14" position="50 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox15" position="55 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox16" position="60 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox17" position="65 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box id="myBox18" position="70 7.5 -85" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 
-			<!-- Open second path -->
+				<!-- Open second path -->
 
-			<a-entity gltf-model="#Panel" position="2.5 0 -85" scale="0.05 0.05 0.05" rotation="0 0 0" event-set__click="_event: click; _target: #myBox19; position: 5 7.5 -90"> </a-entity>
+				<a-entity gltf-model="#Panel" position="2.5 0 -85" scale="0.05 0.05 0.05" rotation="0 0 0" event-set__click="_event: click; _target: #myBox19; position: 5 7.5 -90"> </a-entity>
 
-			<a-box id="myBox19" position="5 2.5 -90" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body></a-box>
+				<a-box id="myBox19" position="5 2.5 -90" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body></a-box>
 
-			<a-entity gltf-model="#Torch" position="17.5 3.5 -95" scale="1 1 1" rotation="0 -90 0" light="type: point; intensity: 2; color: #ffcc00; distance: 10; decay: 2" static-body></a-entity>
+				<a-entity gltf-model="#Torch" position="17.5 3.5 -95" scale="1 1 1" rotation="0 -90 0" light="type: point; intensity: 2; color: #ffcc00; distance: 10; decay: 2" static-body></a-entity>
 
-			<a-entity gltf-model="#Torch" position="5 3.5 -127.5" scale="1 1 1" rotation="0 0 0" light="type: point; intensity: 2; color: #ffcc00; distance: 10; decay: 2" static-body></a-entity>
+				<a-entity gltf-model="#Torch" position="5 3.5 -127.5" scale="1 1 1" rotation="0 0 0" light="type: point; intensity: 2; color: #ffcc00; distance: 10; decay: 2" static-body></a-entity>
 
-			<!-- Second Closure -->
-			<a-box id="myBox20" position="10 2.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
+				<!-- Second Closure -->
+				<a-box id="myBox20" position="10 2.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
 
-			<a-box id="myBox21" position="15 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
+				<a-box id="myBox21" position="15 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
 
-			<a-box id="myBox22" position="20 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
+				<a-box id="myBox22" position="20 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
 
-			<a-box id="myBox23" position="25 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
+				<a-box id="myBox23" position="25 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
 
-			<a-box id="myBox24" position="30 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
+				<a-box id="myBox24" position="30 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
 
-			<a-box id="myBox25" position="35 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
-			<a-box id="myBox26" position="40 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
-			<a-box id="myBox27" position="45 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
-			<a-box id="myBox28" position="50 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
-			<a-box id="myBox29" position="55 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
+				<a-box id="myBox25" position="35 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
+				<a-box id="myBox26" position="40 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
+				<a-box id="myBox27" position="45 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
+				<a-box id="myBox28" position="50 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
+				<a-box id="myBox29" position="55 7.5 -125" width="5" height="5" depth="5" src="./images/walls3.jpeg" static-body> </a-box>
 
-			<a-entity gltf-model="#Panel" position="2.5 0 -125" scale="0.05 0.05 0.05" rotation="0 0 0" event-set__click="_event: click; _target: #myBox20; position: 5 7.5 -90" onclick="moveBoxes2()">
-			</a-entity>
+				<a-entity
+					gltf-model="#Panel"
+					position="2.5 0 -125"
+					scale="0.05 0.05 0.05"
+					rotation="0 0 0"
+					event-set__click="_event: click; _target: #myBox20; position: 5 7.5 -90"
+					onclick="moveBoxes2()"
+				>
+				</a-entity>
 
-			<!-- handle collision -->
-			<a-entity collision-handler></a-entity>
+				<!-- handle collision -->
+				<a-entity collision-handler></a-entity>
 
-			<!-- New Ghosts -->
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="5 2 -75"
-				scale="0.01 0.01 0.01"
-				rotation="0 270 0"
-				animation="property: position; 
+				<!-- New Ghosts -->
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="5 2 -75"
+					scale="0.01 0.01 0.01"
+					rotation="0 270 0"
+					animation="property: position; 
     to: 5 2 -5; 
     dur: 6000;
     dir: alternate;
     easing: linear; 
     loop: true"
-			>
-			</a-entity>
+				>
+				</a-entity>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="25 2 -5"
-				scale="0.01 0.01 0.01"
-				rotation="0 1800 0"
-				animation="property: position; 
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="25 2 -5"
+					scale="0.01 0.01 0.01"
+					rotation="0 1800 0"
+					animation="property: position; 
 to: 5 2 -5; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
 loop: true"
-			>
-			</a-entity>
+				>
+				</a-entity>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="15 2 -75"
-				scale="0.01 0.01 0.01"
-				rotation="0 90 0"
-				animation="property: position; 
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="15 2 -75"
+					scale="0.01 0.01 0.01"
+					rotation="0 90 0"
+					animation="property: position; 
 to: 15 2 -65; 
 dur: 1000;
 dir: alternate;
 easing: linear; 
 loop: true"
-			>
-			</a-entity>
+				>
+				</a-entity>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="15 2 -55"
-				scale="0.01 0.01 0.01"
-				rotation="0 90 0"
-				animation="property: position; 
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="15 2 -55"
+					scale="0.01 0.01 0.01"
+					rotation="0 90 0"
+					animation="property: position; 
 to: 15 2 -45; 
 dur: 1000;
 dir: alternate;
 easing: linear; 
 loop: true"
-			>
-			</a-entity>
+				>
+				</a-entity>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="25 2 -75"
-				scale="0.01 0.01 0.01"
-				rotation="0 90 0"
-				animation="property: position; 
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="25 2 -75"
+					scale="0.01 0.01 0.01"
+					rotation="0 90 0"
+					animation="property: position; 
 to: 25 2 -35; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
 loop: true"
-			>
-			</a-entity>
+				>
+				</a-entity>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="35 2 -65"
-				scale="0.01 0.01 0.01"
-				rotation="0 90 0"
-				animation="property: position; 
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="35 2 -65"
+					scale="0.01 0.01 0.01"
+					rotation="0 90 0"
+					animation="property: position; 
 to: 35 2 -35; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
 loop: true"
-			>
-			</a-entity>
+				>
+				</a-entity>
 
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="45 2 -65"
-				scale="0.01 0.01 0.01"
-				rotation="0 90 0"
-				animation="property: position; 
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="45 2 -65"
+					scale="0.01 0.01 0.01"
+					rotation="0 90 0"
+					animation="property: position; 
 to: 45 2 -35; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
 loop: true"
-			>
-			</a-entity>
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="55 2 -65"
-				scale="0.01 0.01 0.01"
-				rotation="0 90 0"
-				animation="property: position; 
+				>
+				</a-entity>
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="55 2 -65"
+					scale="0.01 0.01 0.01"
+					rotation="0 90 0"
+					animation="property: position; 
 to: 55 2 -45; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
 loop: true"
-			>
-			</a-entity>
-			<a-entity
-				class="ghost"
-				gltf-model="#Ghost2"
-				position="75 2 -45"
-				scale="0.01 0.01 0.01"
-				rotation="0 90 0"
-				animation="property: position; 
+				>
+				</a-entity>
+				<a-entity
+					class="ghost"
+					gltf-model="#Ghost2"
+					position="75 2 -45"
+					scale="0.01 0.01 0.01"
+					rotation="0 90 0"
+					animation="property: position; 
 to: 75 2 -95; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
 loop: true"
-			>
-			</a-entity>
-		</a-scene>
-		<script src="./js/index.js "></script>
-		<script src="./js/collision.js"></script>
+				>
+				</a-entity>
+			</a-scene>
+		</div>
+
+		<!-- Game Over -->
+		<div class="game-over">
+			<div class="game-over-content">
+				<h1>Game Over</h1>
+				<p class="game-over--text">Better Luck Next Time</p>
+				<button class="scary-button" onclick="restartGame()">Try Again ☠️</button>
+			</div>
+		</div>
+
+		<script type="module" src="./js/index.js "></script>
+		<script type="module" src="./js/collision.js"></script>
 	</body>
 </html>
