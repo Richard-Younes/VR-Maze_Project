@@ -11,13 +11,12 @@ for (let i = 0; i < playerLives; i++) {
 
 console.log(playerLives);
 
-// Handle the collision
+// *********************Handle the collision**********************************//
 
 // Get the player entity by its ID
 const player = document.getElementById('player');
-const beginPosition = { x: 5, y: 4, z: 15 }; // Set the new position values
-// Get the ghost entity by its ID
-const ghost = document.querySelector('.ghost');
+const beginPosition = { x: 5, y: 4, z: 10 }; // Set the new position values
+const ghosts = document.querySelectorAll('.ghost'); // Get all entities with the class 'ghost'
 
 const margin = 0.5;
 
@@ -25,29 +24,34 @@ function checkCollision() {
 	// Get the position of the player entity
 	const playerPosition = player.getAttribute('position');
 
-	// Get the position of the ghost entity
-	const ghostPosition = ghost.getAttribute('position');
+	// Iterate through all entities with the class 'ghost'
+	ghosts.forEach((ghost) => {
+		// Get the position of the current ghost entity
+		const ghostPosition = ghost.getAttribute('position');
 
-	if (playerLives > 0) {
-		if (Math.abs(playerPosition.x - ghostPosition.x) <= margin && Math.abs(playerPosition.z - ghostPosition.z) <= margin) {
-			// Log the player position
-			console.log('Player Position:', playerPosition);
+		if (playerLives > 0) {
+			// Check for collision with the current ghost
+			if (Math.abs(playerPosition.x - ghostPosition.x) <= margin && Math.abs(playerPosition.z - ghostPosition.z) <= margin) {
+				// Log the player position
+				console.log('Player Position:', playerPosition);
 
-			// Log the ghost position
-			console.log('Ghost Position:', ghostPosition);
+				// Log the ghost position
+				console.log('Ghost Position:', ghostPosition);
 
-			console.log('Collision');
-			playerLives = playerLives - 1;
-			livesDisplay.textContent = '';
-			for (let i = 0; i < playerLives; i++) {
-				livesDisplay.textContent += '❤️';
+				console.log('Collision');
+				playerLives = playerLives - 1;
+				livesDisplay.textContent = '';
+				for (let i = 0; i < playerLives; i++) {
+					livesDisplay.textContent += '❤️';
+				}
+				console.log(playerLives);
+				player.setAttribute('position', beginPosition);
 			}
-			console.log(playerLives);
-			player.setAttribute('position', beginPosition);
+		} else {
+			console.log('You Lost');
 		}
-	} else {
-		console.log('You Lost');
-	}
+	});
 }
 
-const collisionCheckInterval = setInterval(checkCollision, 100);
+// Call the checkCollision function, for example, in your game loop
+setInterval(checkCollision, 100); // Adjust the interval as needed

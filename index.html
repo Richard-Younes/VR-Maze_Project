@@ -5,9 +5,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 		<link rel="stylesheet" href="./style.css" />
-
 		<script src="./js/aframe-master.1.0.4.min.js"></script>
 		<script src="./js/aframe-extras.min.js"></script>
 		<script src="./js/aframe-physics-system.min.js"></script>
@@ -16,29 +14,13 @@
 		<script src="./js/aframe-environment-component.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/aframe-event-set-component@4.0.1/dist/aframe-event-set-component.min.js"></script>
 		<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
-		<style>
-			#loading-overlay {
-				position: fixed;
-				font-size: 30px;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background: #fff;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				z-index: 9999;
-			}
-		</style>
-
 		<script>
 			// Simulate loading delay (you can replace this with your actual loading logic)
 			setTimeout(function () {
 				document.getElementById('loading-overlay').style.display = 'none';
-			}, 2000); // Replace 3000 with the actual loading time in milliseconds
+			}, 5000); // Replace 3000 with the actual loading time in milliseconds
 		</script>
-		<title>Document</title>
+		<title>MAZE</title>
 	</head>
 
 	<body>
@@ -72,15 +54,18 @@
 			<p id="player-lives-display"></p>
 		</div>
 
-		<a-scene>
+		<a-scene physics=" gravity:-5">
 			<!-- physics=" gravity:-5" -->
 			<!-- <a-entity rotation="-90 0 0 " position=" 5 20 5 ">
 				<a-camera></a-camera>
 			</a-entity> -->
 
+			<!-- Collision detector entity (invisible) -->
+			<a-box id="collision-detector" position="0 0 0" scale="0.1 0.1 0.1" visible="false" static-body collision-detector></a-box>
+
 			<a-entity id="cage" gltf-model="#cage" kinematic-body position="5 40 15"> </a-entity>
 
-			<a-entity class="player" id="player" camera universal-controls look-controls wasd-controls="acceleration:350" velocity="0 0 0" position="5 40 15" kinematic-body collidable>
+			<a-entity class="player" id="player" camera universal-controls look-controls wasd-controls="acceleration:30" velocity="0 0 0" position="5 40 15" collidable kinematic-body>
 				<!-- position 5 40 15   acceleration:30 kinematic-body-->
 				<a-entity
 					cursor
@@ -173,7 +158,7 @@
 			>
 			</a-entity>
 
-			<a-text value="LEFT or right? Choose the right path" color="white" align="center" position="5 5 -7.5" font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
+			<a-text value="LEFT or right? Choose the right path" color="white" align="center" position="5 7.5 -7.5" font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
 
 			<a-entity
 				gltf-model="#Ghost"
@@ -185,9 +170,22 @@
 
 			<a-entity gltf-model="#Monster" position="27 2.5 -5" scale="1 1 1" rotation="0 -90 0" sound="src: url(Sound/Jigsaw_laugh.mp); autoplay: true; loop:true; volume:0.2" static-body></a-entity>
 
-			<a-entity gltf-model="#Freddy" position="5 0 -35" scale="1 1 1" rotation="0 0 0" sound="src: url(Sound/Freddy.mp); autoplay: true; loop:true; volume:0.2" static-body></a-entity>
+			<a-entity
+				class="ghost"
+				gltf-model="#Freddy"
+				position="15 0 -35"
+				scale="1 1 1"
+				rotation="0 0 0"
+				sound="src: url(Sound/Freddy.mp); autoplay: true; loop:true; volume:0.2"
+				animation="property: position; 
+to: 15 0 -15; 
+dur: 3000;
+dir: alternate;
+easing: linear; 
+loop: true"
+			></a-entity>
 
-			<a-text value="Right this time?" color="white" align="center" position="5 2.5 -35" font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
+			<a-text value="Right this time?" color="white" align="center" position="5 7.5 -35" font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"></a-text>
 
 			<a-entity gltf-model="#Text" position="7.5 4.1 4" scale="2 5 2" rotation="0 0 90"></a-entity>
 
@@ -203,7 +201,6 @@
 			</a-text>
 
 			<a-entity class="ghost" gltf-model="#Headless" position="6 0 4" scale="0.1 0.1 0.1" rotation="0 0 0"></a-entity>
-
 			<a-box id="myBox2" position="70 2.5 -15" width="5" height="5" depth="5" src="./images/walls1.jpeg" static-body> </a-box>
 
 			<a-box id="myBox3" position="85 7.5 -15" width="5" height="5" depth="5" src="./images/walls1.jpeg" visible="false" static-body> </a-box>
@@ -246,6 +243,7 @@
 			></a-text>
 
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
 				position="60 8 -10"
 				scale="0.02 0.02 0.02"
@@ -261,6 +259,7 @@
 			</a-entity>
 
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
 				position="60 8 -10"
 				scale="0.02 0.02 0.02"
@@ -276,6 +275,7 @@
 			</a-entity>
 
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
 				position="0 8 0"
 				scale="0.02 0.02 0.02"
@@ -291,6 +291,7 @@
 			</a-entity>
 
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
 				position="200 8 0"
 				scale="0.02 0.02 0.02"
@@ -306,6 +307,7 @@
 			</a-entity>
 
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
 				position="200 8 -200"
 				scale="0.02 0.02 0.02"
@@ -321,6 +323,7 @@
 			</a-entity>
 
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
 				position="0 8 -200"
 				scale="0.02 0.02 0.02"
@@ -420,12 +423,13 @@
 
 			<!-- New Ghosts -->
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
-				position="5 5 -75"
+				position="5 2 -75"
 				scale="0.01 0.01 0.01"
 				rotation="0 270 0"
 				animation="property: position; 
-    to: 5 5 -5; 
+    to: 5 2 -5; 
     dur: 6000;
     dir: alternate;
     easing: linear; 
@@ -433,15 +437,14 @@
 			>
 			</a-entity>
 
-			<a-box id="myBox19" position="5 2.5 -90" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body></a-box>
-
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
-				position="25 5 -5"
+				position="25 2 -5"
 				scale="0.01 0.01 0.01"
 				rotation="0 1800 0"
 				animation="property: position; 
-to: 5 5 -5; 
+to: 5 2 -5; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
@@ -450,12 +453,13 @@ loop: true"
 			</a-entity>
 
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
-				position="15 5 -75"
+				position="15 2 -75"
 				scale="0.01 0.01 0.01"
 				rotation="0 90 0"
 				animation="property: position; 
-to: 15 5 -65; 
+to: 15 2 -65; 
 dur: 1000;
 dir: alternate;
 easing: linear; 
@@ -464,12 +468,13 @@ loop: true"
 			</a-entity>
 
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
-				position="15 5 -55"
+				position="15 2 -55"
 				scale="0.01 0.01 0.01"
 				rotation="0 90 0"
 				animation="property: position; 
-to: 15 5 -45; 
+to: 15 2 -45; 
 dur: 1000;
 dir: alternate;
 easing: linear; 
@@ -478,12 +483,13 @@ loop: true"
 			</a-entity>
 
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
-				position="25 5 -75"
+				position="25 2 -75"
 				scale="0.01 0.01 0.01"
 				rotation="0 90 0"
 				animation="property: position; 
-to: 25 5 -35; 
+to: 25 2 -35; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
@@ -492,12 +498,13 @@ loop: true"
 			</a-entity>
 
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
-				position="35 5 -65"
+				position="35 2 -65"
 				scale="0.01 0.01 0.01"
 				rotation="0 90 0"
 				animation="property: position; 
-to: 35 5 -35; 
+to: 35 2 -35; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
@@ -506,12 +513,13 @@ loop: true"
 			</a-entity>
 
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
-				position="45 5 -65"
+				position="45 2 -65"
 				scale="0.01 0.01 0.01"
 				rotation="0 90 0"
 				animation="property: position; 
-to: 45 5 -35; 
+to: 45 2 -35; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
@@ -519,12 +527,13 @@ loop: true"
 			>
 			</a-entity>
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
-				position="55 5 -65"
+				position="55 2 -65"
 				scale="0.01 0.01 0.01"
 				rotation="0 90 0"
 				animation="property: position; 
-to: 55 5 -45; 
+to: 55 2 -45; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
@@ -532,12 +541,13 @@ loop: true"
 			>
 			</a-entity>
 			<a-entity
+				class="ghost"
 				gltf-model="#Ghost2"
-				position="75 5 -45"
+				position="75 2 -45"
 				scale="0.01 0.01 0.01"
 				rotation="0 90 0"
 				animation="property: position; 
-to: 75 5 -95; 
+to: 75 2 -95; 
 dur: 3000;
 dir: alternate;
 easing: linear; 
