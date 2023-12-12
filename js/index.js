@@ -253,36 +253,6 @@ function moveBoxes2() {
 				box.addEventListener('animationcomplete', function () {
 					moveBoxWithDelay(index + 1);
 				});
-			}, index * 20); // Add a delay of 2 seconds for each box
-		}
-	}
-
-	// Start moving boxes with a delay
-	moveBoxWithDelay(0);
-}
-
-function moveBoxes2() {
-	// Remove the event listener to prevent multiple clicks
-	document.getElementById('Panel').removeAttribute('onclick');
-
-	// Array of box IDs
-	var boxIds = ['myBox21', 'myBox22', 'myBox23', 'myBox24', 'myBox25', 'myBox26', 'myBox27', 'myBox28', 'myBox29'];
-
-	// Function to move a box with a delay
-	function moveBoxWithDelay(index) {
-		if (index < boxIds.length) {
-			setTimeout(function () {
-				var box = document.getElementById(boxIds[index]);
-				box.setAttribute('animation', {
-					property: 'position',
-					to: { x: box.getAttribute('position').x, y: 2.5, z: -125 },
-					dur: 2000, // Duration of the animation in milliseconds (2 seconds)
-				});
-
-				// Move the next box after the current animation completes
-				box.addEventListener('animationcomplete', function () {
-					moveBoxWithDelay(index + 1);
-				});
 			}, index * 200); // Add a delay of 2 seconds for each box
 		}
 	}
@@ -290,6 +260,3 @@ function moveBoxes2() {
 	// Start moving boxes with a delay
 	moveBoxWithDelay(0);
 }
-
-
-
