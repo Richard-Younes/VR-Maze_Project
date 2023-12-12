@@ -72,7 +72,7 @@
 			<p id="player-lives-display"></p>
 		</div>
 
-		<a-scene physics=" gravity:-5">
+		<a-scene>
 			<!-- physics=" gravity:-5" -->
 			<!-- <a-entity rotation="-90 0 0 " position=" 5 20 5 ">
 				<a-camera></a-camera>
@@ -80,7 +80,7 @@
 
 			<a-entity id="cage" gltf-model="#cage" kinematic-body position="5 40 15"> </a-entity>
 
-			<a-entity class="player" id="player" camera universal-controls look-controls wasd-controls="acceleration:30" velocity="0 0 0" position="5 40 15" kinematic-body collision-detector>
+			<a-entity class="player" id="player" camera universal-controls look-controls wasd-controls="acceleration:350" velocity="0 0 0" position="5 40 15" kinematic-body collidable>
 				<!-- position 5 40 15   acceleration:30 kinematic-body-->
 				<a-entity
 					cursor
@@ -177,7 +177,7 @@
 
 			<a-entity
 				gltf-model="#Ghost"
-				position="5 5 -7.5"
+				position="5 10 -7.5"
 				scale="0.02 0.02 0.02"
 				rotation="0 0 0"
 				animation__rotation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"
@@ -417,6 +417,133 @@
 
 			<!-- handle collision -->
 			<a-entity collision-handler></a-entity>
+
+			<!-- New Ghosts -->
+			<a-entity
+				gltf-model="#Ghost2"
+				position="5 5 -75"
+				scale="0.01 0.01 0.01"
+				rotation="0 270 0"
+				animation="property: position; 
+    to: 5 5 -5; 
+    dur: 6000;
+    dir: alternate;
+    easing: linear; 
+    loop: true"
+			>
+			</a-entity>
+
+			<a-box id="myBox19" position="5 2.5 -90" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body></a-box>
+
+			<a-entity
+				gltf-model="#Ghost2"
+				position="25 5 -5"
+				scale="0.01 0.01 0.01"
+				rotation="0 1800 0"
+				animation="property: position; 
+to: 5 5 -5; 
+dur: 3000;
+dir: alternate;
+easing: linear; 
+loop: true"
+			>
+			</a-entity>
+
+			<a-entity
+				gltf-model="#Ghost2"
+				position="15 5 -75"
+				scale="0.01 0.01 0.01"
+				rotation="0 90 0"
+				animation="property: position; 
+to: 15 5 -65; 
+dur: 1000;
+dir: alternate;
+easing: linear; 
+loop: true"
+			>
+			</a-entity>
+
+			<a-entity
+				gltf-model="#Ghost2"
+				position="15 5 -55"
+				scale="0.01 0.01 0.01"
+				rotation="0 90 0"
+				animation="property: position; 
+to: 15 5 -45; 
+dur: 1000;
+dir: alternate;
+easing: linear; 
+loop: true"
+			>
+			</a-entity>
+
+			<a-entity
+				gltf-model="#Ghost2"
+				position="25 5 -75"
+				scale="0.01 0.01 0.01"
+				rotation="0 90 0"
+				animation="property: position; 
+to: 25 5 -35; 
+dur: 3000;
+dir: alternate;
+easing: linear; 
+loop: true"
+			>
+			</a-entity>
+
+			<a-entity
+				gltf-model="#Ghost2"
+				position="35 5 -65"
+				scale="0.01 0.01 0.01"
+				rotation="0 90 0"
+				animation="property: position; 
+to: 35 5 -35; 
+dur: 3000;
+dir: alternate;
+easing: linear; 
+loop: true"
+			>
+			</a-entity>
+
+			<a-entity
+				gltf-model="#Ghost2"
+				position="45 5 -65"
+				scale="0.01 0.01 0.01"
+				rotation="0 90 0"
+				animation="property: position; 
+to: 45 5 -35; 
+dur: 3000;
+dir: alternate;
+easing: linear; 
+loop: true"
+			>
+			</a-entity>
+			<a-entity
+				gltf-model="#Ghost2"
+				position="55 5 -65"
+				scale="0.01 0.01 0.01"
+				rotation="0 90 0"
+				animation="property: position; 
+to: 55 5 -45; 
+dur: 3000;
+dir: alternate;
+easing: linear; 
+loop: true"
+			>
+			</a-entity>
+			<a-entity
+				gltf-model="#Ghost2"
+				position="75 5 -45"
+				scale="0.01 0.01 0.01"
+				rotation="0 90 0"
+				animation="property: position; 
+to: 75 5 -95; 
+dur: 3000;
+dir: alternate;
+easing: linear; 
+loop: true"
+			>
+			</a-entity>
 		</a-scene>
 		<script src="./js/index.js "></script>
 		<script src="./js/collision.js"></script>
