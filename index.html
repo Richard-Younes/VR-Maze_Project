@@ -21,8 +21,6 @@
 			}, 5000); // Replace 3000 with the actual loading time in milliseconds
 		</script>
 		<script>
-			// Function to show the game over screen
-
 			// Function to restart the game
 			function restartGame() {
 				document.querySelector('.game-over').style.display = 'none';
@@ -36,6 +34,57 @@
 	</head>
 
 	<body>
+		<div class="new-game">
+			<h1 class="new-game-heading-one">Welcome to The MAze of Shadows</h1>
+			<p class="new-game-paragraph">
+				Prepare to embark on a chilling journey through the unknown. The Maze of Shadows awaits, shrouded in mystery and cloaked in darkness. Are you brave enough to navigate its twists and
+				turns?
+			</p>
+			<h2 class="new-game-heading-two">Instructions:</h2>
+			<ol class="new-game-instructions">
+				<li class="new-game-instructions--header">Controls</li>
+				<li class="new-game-instructions--ul">
+					<ul>
+						<li>Use the VR headset to look around.</li>
+						<li>Navigate through the maze either by walking with a VR headset or using the Arrows/WASD controls on your keyboard.</li>
+					</ul>
+				</li>
+
+				<li class="new-game-instructions--header">Objective:</li>
+
+				<li class="new-game-instructions--ul">
+					<ul>
+						<li>Your goal is to reach the elusive trophy hidden deep within the maze.</li>
+						<li>The clock is ticking, and time is your nemesis.</li>
+					</ul>
+				</li>
+
+				<li class="new-game-instructions--header">Difficulty Level:</li>
+				<li class="new-game-instructions--ul">
+					<ul>
+						<li>💀 Easy: For those new to the horrors that lie ahead.</li>
+						<li>💀💀 Medium: A moderate challenge for the daring.</li>
+						<li>💀💀💀 Hard: Only for the bravest souls.</li>
+					</ul>
+				</li>
+
+				<li class="new-game-instructions--header">Lives:</li>
+				<li>
+					<ul>
+						<li>You have 1 to 4 lives depending on the difficulty chosen. Be cautious, for the shadows harbor unseen dangers.</li>
+						<li>Lose a life if touched by the entities that lurk in the darkness.</li>
+					</ul>
+				</li>
+			</ol>
+			<div class="difficulty-container">
+				<h2>Are you ready to face the Maze of Shadows?</h2>
+				<p>Choose your difficulty and step into the abyss.</p>
+				<button class="scary-button new-game-easy">Easy</button>
+				<button class="scary-button new-game-medium">Medium</button>
+				<button class="scary-button new-game-hard">Hard</button>
+			</div>
+		</div>
+
 		<div class="game-container">
 			<!-- Loading Overlay -->
 			<div id="loading-overlay">Loading...</div>
