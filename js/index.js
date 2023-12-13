@@ -171,14 +171,16 @@ let count = 0;
 
 let counterValue = 0;
 const counterDisplay = document.getElementById('counterDisplay');
-
+let arrived = false;
 function updateCounter() {
-	counterValue++;
-	counterDisplay.textContent = 'Time: ' + counterValue;
+	if (!arrived) {
+		counterValue++;
+		counterDisplay.textContent = 'Time: ' + counterValue;
 
-	// Check if you've reached the end of the map, and clear the interval if necessary
-	if (counterValue >= mapEnd) {
-		clearInterval(intervalId);
+		// Check if you've reached the end of the map, and clear the interval if necessary
+		if (counterValue >= mapEnd) {
+			clearInterval(intervalId);
+		}
 	}
 }
 

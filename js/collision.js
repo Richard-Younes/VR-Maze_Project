@@ -16,7 +16,7 @@ console.log(playerLives);
 
 // Get the player entity by its ID
 const player = document.getElementById('player');
-const beginPosition = { x: 5, y: 4, z: 10 }; // Set the new position values
+const beginPosition = { x: 5, y: 2.1, z: 10 }; // Set the new position values
 const ghosts = document.querySelectorAll('.ghost'); // Get all entities with the class 'ghost'
 
 const margin = 0.8;
