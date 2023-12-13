@@ -9,22 +9,23 @@
 		<script src="./js/aframe-master.1.0.4.min.js"></script>
 		<script src="./js/aframe-extras.min.js"></script>
 		<script src="./js/aframe-physics-system.min.js"></script>
-		<script src="./js/aframe-spe-particles-component.js "></script>
 		<script src="./js/aframe-spritesheet-animation.js"></script>
 		<script src="./js/aframe-environment-component.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/aframe-event-set-component@4.0.1/dist/aframe-event-set-component.min.js"></script>
 		<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
+		<script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+
 		<script>
 			// Simulate loading delay (you can replace this with your actual loading logic)
 			setTimeout(function () {
-				document.getElementById('loading-overlay').style.display = 'none';
+				document.getElementById("loading-overlay").style.display = "none";
 			}, 1000); // Replace 3000 with the actual loading time in milliseconds
 		</script>
 		<script>
 			// Function to restart the game
 			function restartGame() {
-				document.querySelector('.game-over').style.display = 'none';
-				document.querySelector('.game-container').style.display = 'block';
+				document.querySelector(".game-over").style.display = "none";
+				document.querySelector(".game-container").style.display = "block";
 				// Additional logic to reset game state if needed
 				location.reload(true);
 			}
@@ -34,60 +35,6 @@
 	</head>
 
 	<body>
-		<!-- <div class="new-game">
-			<h1 class="new-game-heading-one">Welcome to The MAze of Shadows</h1>
-			<p class="new-game-paragraph">
-				Prepare to embark on a chilling journey through the unknown. The Maze of Shadows awaits, shrouded in mystery and cloaked in darkness. Are you brave enough to navigate its twists and
-				turns?
-			</p>
-			<h2 class="new-game-heading-two">Instructions:</h2>
-			<ol class="new-game-instructions">
-				<li class="new-game-instructions--header">Controls</li>
-				<li class="new-game-instructions--ul">
-					<ul>
-						<li>Use the VR headset to look around.</li>
-						<li>Navigate through the maze either by walking with a VR headset or using the Arrows/WASD controls on your keyboard.</li>
-					</ul>
-				</li>
-
-				<li class="new-game-instructions--header">Objective:</li>
-
-				<li class="new-game-instructions--ul">
-					<ul>
-						<li>Your goal is to reach the elusive trophy hidden deep within the maze.</li>
-						<li>The clock is ticking, and time is your nemesis.</li>
-					</ul>
-				</li>
-
-
-
-				<li class="new-game-instructions--header">Difficulty Level:</li>
-				<li class="new-game-instructions--ul">
-					<ul>
-						<li>💀 Easy: For those new to the horrors that lie ahead.</li>
-						<li>💀💀 Medium: A moderate challenge for the daring.</li>
-						<li>💀💀💀 Hard: Only for the bravest souls.</li>
-					</ul>
-				</li>
-
-				<li class="new-game-instructions--header">Lives:</li>
-				<li>
-					<ul>
-						<li>You have 1 to 4 lives depending on the difficulty chosen. Be cautious, for the shadows harbor unseen dangers.</li>
-						<li>Lose a life if touched by the entities that lurk in the darkness.</li>
-					</ul>
-				</li>
-			</ol>
-
-
-			<div class="difficulty-container">
-				<h2>Are you ready to face the Maze of Shadows?</h2>
-				<p>Choose your difficulty and step into the abyss.</p>
-				<button class="scary-button new-game-easy">Easy</button>
-				<button class="scary-button new-game-medium">Medium</button>
-				<button class="scary-button new-game-hard">Hard</button>
-			</div>
-		</div> -->
 		<div class="game-container">
 			<!-- Loading Overlay -->
 			<div id="loading-overlay">Loading...</div>
@@ -110,6 +57,10 @@
 				<a-asset-item id="Word" src="./asset/bubble_speech/scene.gltf"></a-asset-item>
 				<a-asset-item id="End" src="./asset/a_cool_little_cup_just_for_fun/scene.gltf"></a-asset-item>
 				<a-asset-item id="Torch" src="./asset/torch/scene.gltf"></a-asset-item>
+				<audio id="launch" src="./Sound/rocket-launch.wav" preload="auto"></audio>
+				<audio id="burst1" src="./Sound/firework-burst-short.wav" preload="auto"></audio>
+				<audio id="burst2" src="./Sound/firework-burst-medium.wav" preload="auto"></audio>
+				<audio id="burst3" src="./Sound/firework-burst-long.wav" preload="auto"></audio>
 
 				<a-asset-item id="Fiddlestick" src="./asset/fiddlesticks_league_of_legends_character/scene.gltf"></a-asset-item>
 			</a-asset>
@@ -117,6 +68,7 @@
 			<div id="player-lives">
 				<p id="player-lives-display">&nbsp;</p>
 				<p id="counterDisplay">&nbsp;</p>
+				<p id="highscore">&nbsp;</p>
 			</div>
 
 			<a-scene physics=" gravity:-1">
@@ -146,18 +98,18 @@
 					<a-plane static-body visible="false" rotation="-90 0 0 " position="100 38 -100 " width="300 " height="300 " depth="20 " rotation="0 0 0 "></a-plane>
 					<a-box position="0 38 15" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 					<a-box position="0 38 10" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body>
-						<a-text class="new-game-atext" value="Difficulty Level:" position=" 2.5 2.4 0.8" align="center" color="red" scale="2 2 2" rotation="0 90 0"></a-text>
+						<a-text class="new-game-atext" value="Difficulty Level:" position=" 2.5 2.4 2.5" align="center" color="#9c1515" scale="2 2 2" rotation="0 90 0"></a-text>
 						<a-text
 							class="new-game-atext"
 							value="Easy: For those new to the horrors that lie ahead."
-							position=" 2.5 2 1"
+							position=" 2.5 2 2.6"
 							align="center"
-							color="red"
+							color="#9c1515"
 							scale="1 1 1"
 							rotation="0 90 0"
 						></a-text>
-						<a-text class="new-game-atext" value="Medium: A moderate challenge for the daring." position=" 2.5 1.5 3.5" color="red" scale="1 1 1" rotation="0 90 0"></a-text>
-						<a-text class="new-game-atext" value="Hard: Only for the bravest souls." position=" 2.5 1 3.5" color="red" scale="1 1 1" rotation="0 90 0"></a-text>
+						<a-text class="new-game-atext" value="Medium: A moderate challenge for the daring." position=" 2.5 1.5 5" color="#9c1515" scale="1 1 1" rotation="0 90 0"></a-text>
+						<a-text class="new-game-atext" value="Hard: Only for the bravest souls." position=" 2.5 1 5" color="#9c1515" scale="1 1 1" rotation="0 90 0"></a-text>
 					</a-box>
 
 					<a-box position="0 38 5" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
@@ -165,53 +117,68 @@
 					<a-box position="10 38 5" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 					<a-box position="15 38 15" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 					<a-box position="15 38 10" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body>
-						<a-text class="new-game-atext" value="Instructions" position=" -2.5 2.4 2" align="center" color="red" scale="2 2 2" rotation="0 -90 0"></a-text>
-						<a-text class="new-game-atext" value="1- Controls:" position=" -2.5 2 1.8" align="center" color="red" scale="1.5 1.5 1.5" rotation="0 -90 0"></a-text>
-						<a-text class="new-game-atext" value="1.1- Use the VR headset to look around." position=" -2.5 1.5 1.2" color="red" scale="1 1 1" rotation="0 -90 0"></a-text>
+						<a-text class="new-game-atext" value="Instructions" position=" -2.5 2.4 2" align="center" color="#9c1515" scale="2 2 2" rotation="0 -90 0"></a-text>
+						<a-text class="new-game-atext" value="1- Controls:" position=" -2.5 2 1.8" align="center" color="#9c1515" scale="1.5 1.5 1.5" rotation="0 -90 0"></a-text>
+						<a-text class="new-game-atext" value="1.1- Use the VR headset to look around." position=" -2.5 1.5 1.2" color="#9c1515" scale="1 1 1" rotation="0 -90 0"></a-text>
 						<a-text
 							class="new-game-atext"
 							value="1.2- Navigate through the maze either by walking with a VR headset or using the Arrows/WASD controls on your keyboard."
 							position=" -2.5 1 1.2"
-							color="red"
+							color="#9c1515"
 							scale="1 1 1"
 							rotation="0 -90 0"
 						></a-text>
-						<a-text class="new-game-atext" value="2- Objective:" position=" -2.5 0.3 1.8" align="center" color="red" scale="1.5 1.5 1.5" rotation="0 -90 0"></a-text>
+						<a-text class="new-game-atext" value="2- Objective:" position=" -2.5 0.3 1.8" align="center" color="#9c1515" scale="1.5 1.5 1.5" rotation="0 -90 0"></a-text>
 						<a-text
 							class="new-game-atext"
 							value="2.1- Your goal is to reach the elusive trophy hidden deep within the maze."
 							position=" -2.5 -0.2 1.2"
-							color="red"
+							color="#9c1515"
 							scale="1 1 1"
 							rotation="0 -90 0"
 						></a-text>
-						<a-text class="new-game-atext" value="2.2- The clock is ticking, and time is your nemesis." position=" -2.5 -0.7 1.2" color="red" scale="1 1 1" rotation="0 -90 0"></a-text>
+						<a-text class="new-game-atext" value="2.2- The clock is ticking, and time is your nemesis." position=" -2.5 -0.7 1.2" color="#9c1515" scale="1 1 1" rotation="0 -90 0"></a-text>
 					</a-box>
 					<a-box position="15 38 5" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 					<a-box position="15 38 20" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 					<a-box position="10 38 20" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
 					<a-box position="5 38 20" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
-					<a-text position="3 43 9" value="Welcome to The Maze of Shadows" scale="2.5 2.5 2.5" color="red" rotation="20 0 0"></a-text>
+					<a-text position="3 43 9" value="Welcome to The Maze of Shadows" scale="2.5 2.5 2.5" color="#9c1515" rotation="20 0 0"></a-text>
 
 					<a-text
 						position="7.2 41.5 9"
 						value="Prepare to embark on a chilling journey through the unknown. The Maze of Shadows awaits, shrouded in mystery and cloaked in darkness. Are you brave enough to navigate its twists and
 				turns?"
 						scale="1.75 1.75 1.75"
-						color="red"
+						color="#9c1515"
 						align="center"
 						rotation="15 0 0"
 					></a-text>
 
-					<a-image class="new-game-img" src="./images/New game.jpg" width="11" height="5" position="8 38 8" rotation="0 0 0"></a-image>
+					<a-image class="new-game-img" src="./images/New game.jpg" width="11" height="5" position="8 38 8" rotation="0 0 0" static-body></a-image>
+
+					<!-- Easy Button -->
+					<a-box geometry="primitive: box; width: 1.5; height: 0.5; depth: 0.1" material="color: #000" position="2.5 38 15" class="button" rotation="0 90 0">
+						<a-text value="Easy" align="center" position="0 0 0.05" color="#8a0303"></a-text>
+					</a-box>
+
+					<!-- Medium Button -->
+					<a-box geometry="primitive: box; width: 1.5; height: 0.5; depth: 0.1" material="color: #000" position="2.5 38 12.5" class="button" rotation="0 90 0">
+						<a-text value="Medium" align="center" position="0 0 0.05" color="#8a0303"></a-text>
+					</a-box>
+
+					<!-- Hard Button -->
+					<a-box geometry="primitive: box; width: 1.5; height: 0.5; depth: 0.1" material="color: #000" position="2.5 38 10" class="button" rotation="0 90 0">
+						<a-text value="Hard" align="center" position="0 0 0.05" color="#8a0303"></a-text>
+					</a-box>
 				</a-entity>
 
+				<!---------------------------------------- Game starts ---------------------------------------------------->
 				<!-- Collision detector entity (invisible) -->
 				<a-box id="collision-detector" position="0 0 0" scale="0.1 0.1 0.1" visible="false" static-body collision-detector></a-box>
 
-				<a-entity id="cage" gltf-model="#cage" kinematic-body position="5 40 15"> </a-entity>
-
 				<a-entity class="player" id="player" camera universal-controls look-controls wasd-controls="acceleration:30" velocity="0 0 0" position="5 40 15" collidable kinematic-body>
+					<!-- Position of the trophy 85 2 -105 -->
 					<!-- position 5 40 15   acceleration:30 kinematic-body-->
 					<a-entity
 						cursor
@@ -492,16 +459,17 @@ loop: true"
 				</a-entity>
 
 				<a-entity
+					class="trophy"
 					gltf-model="#End"
 					position="85 2 -105"
 					scale="1 1 1"
 					rotation="0 0 0"
 					stop-counter
 					animation__rotation="property: rotation; to: 0 360 0; dur: 5000; easing: linear; loop: true"
-					static-body
 				></a-entity>
+				<a-entity id="fireworks" position="84 2 -106"></a-entity>
 
-				<a-cylinder position="85 2 -105" radius="2" height="1000" color="gold" opacity="0.8" material="emissive: gold; emissiveIntensity: 1500" shadow="cast: true; receive: true">
+				<a-cylinder position="85 2 -105" radius="2" height="1000" color="gold" opacity="0.5" material="emissive: gold; emissiveIntensity: 1500" shadow="cast: true; receive: true">
 				</a-cylinder>
 
 				<a-entity gltf-model="#Torch" position="62.5 3.5 -20" scale="1 1 1" rotation="0 90 0" light="type: point; intensity: 2; color: #ffcc00; distance: 10; decay: 2" static-body></a-entity>
@@ -726,8 +694,8 @@ loop: true"
 				<button class="scary-button" onclick="restartGame()">Try Again ☠️</button>
 			</div>
 		</div>
+		<script src="./js/collision.js"></script>
 
-		<script type="module" src="./js/index.js "></script>
-		<script type="module" src="./js/collision.js"></script>
+		<script src="./js/index.js "></script>
 	</body>
 </html>
