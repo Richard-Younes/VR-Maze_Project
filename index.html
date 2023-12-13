@@ -18,14 +18,14 @@
 		<script>
 			// Simulate loading delay (you can replace this with your actual loading logic)
 			setTimeout(function () {
-				document.getElementById("loading-overlay").style.display = "none";
+				document.getElementById('loading-overlay').style.display = 'none';
 			}, 1000); // Replace 3000 with the actual loading time in milliseconds
 		</script>
 		<script>
 			// Function to restart the game
 			function restartGame() {
-				document.querySelector(".game-over").style.display = "none";
-				document.querySelector(".game-container").style.display = "block";
+				document.querySelector('.game-over').style.display = 'none';
+				document.querySelector('.game-container').style.display = 'block';
 				// Additional logic to reset game state if needed
 				location.reload(true);
 			}
