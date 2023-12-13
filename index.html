@@ -22,6 +22,14 @@
 			}, 20000); // Replace 3000 with the actual loading time in milliseconds
 		</script>
 		<script>
+			function preloadImages() {
+				const images = ['./images/Loading1.jpg', './images/Loading2.jpg', './images/Loading3.jpg'];
+				for (const image of images) {
+					new Image().src = image;
+				}
+			}
+
+			document.addEventListener('DOMContentLoaded', preloadImages);
 			// Function to restart the game
 			function restartGame() {
 				document.querySelector('.game-over').style.display = 'none';
@@ -87,7 +95,7 @@
 				<!-- <a-entity rotation="-90 0 0 " position=" 5 20 5 ">
 				<a-camera></a-camera>
 			</a-entity> -->
-				<a-sound src="./Sound/Scary-music.mp3" autoplay="true" loop="true" volume="5"></a-sound>
+				<a-sound src="./Sound/Scary-music.mp3" autoplay="true" loop="true" volume="0.8"></a-sound>
 
 				<!----------------------- New game Or starter --------------------------------------->
 				<a-entity id="new-game">
