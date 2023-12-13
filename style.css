@@ -24,6 +24,17 @@
 	z-index: 1;
 }
 
+#highscore {
+	position: fixed;
+	top: -2%;
+	right: 1%;
+	font-size: 24px;
+	font-weight: bold;
+	font-family: 'Times New Roman', Times, serif;
+	color: rgb(255, 0, 0);
+	z-index: 1;
+}
+
 #loading-overlay {
 	position: fixed;
 	font-size: 30px;
@@ -31,11 +42,28 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: #fff;
+	background: #000;
 	display: flex;
+	background-size: cover;
+	background-position: center;
+	color: rgb(255, 0, 0);
+
 	align-items: center;
 	justify-content: center;
 	z-index: 9999;
+	animation: changeBackground 20s infinite; /* Adjust duration as needed */
+}
+
+@keyframes changeBackground {
+	0% {
+		background-image: url('./images/Loading1.jpg');
+	}
+	33% {
+		background-image: url('./images/Loading2.jpg');
+	}
+	66% {
+		background-image: url('./images/Loading3.jpg');
+	}
 }
 
 .game-container {

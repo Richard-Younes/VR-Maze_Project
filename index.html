@@ -19,7 +19,7 @@
 			// Simulate loading delay (you can replace this with your actual loading logic)
 			setTimeout(function () {
 				document.getElementById('loading-overlay').style.display = 'none';
-			}, 1000); // Replace 3000 with the actual loading time in milliseconds
+			}, 20000); // Replace 3000 with the actual loading time in milliseconds
 		</script>
 		<script>
 			// Function to restart the game
@@ -27,7 +27,18 @@
 				document.querySelector('.game-over').style.display = 'none';
 				document.querySelector('.game-container').style.display = 'block';
 				// Additional logic to reset game state if needed
-				location.reload(true);
+				player.setAttribute('position', { x: 5, y: 38, z: 13 });
+				newGame.setAttribute('visible', true);
+				counterValue = 0;
+				counterDisplay.textContent = 'Time: ' + counterValue;
+				arrived = true;
+				playerLives = 4;
+				livesDisplay.textContent = '';
+
+				console.log(playerLives);
+				for (let i = 0; i < playerLives; i++) {
+					livesDisplay.textContent += '❤️';
+				}
 			}
 		</script>
 
@@ -76,6 +87,7 @@
 				<!-- <a-entity rotation="-90 0 0 " position=" 5 20 5 ">
 				<a-camera></a-camera>
 			</a-entity> -->
+				<a-sound src="./Sound/Scary-music.mp3" autoplay="true" loop="true" volume="5"></a-sound>
 
 				<!----------------------- New game Or starter --------------------------------------->
 				<a-entity id="new-game">
@@ -157,18 +169,17 @@
 
 					<a-image class="new-game-img" src="./images/New game.jpg" width="11" height="5" position="8 38 8" rotation="0 0 0" static-body></a-image>
 
-					<!-- Easy Button -->
-					<a-box geometry="primitive: box; width: 1.5; height: 0.5; depth: 0.1" material="color: #000" position="2.5 38 15" class="button" rotation="0 90 0">
+					<a-box id="easyButton" geometry="primitive: box; width: 1.5; height: 0.5; depth: 0.1" material="color: #000" position="2.5 38 15" class="button" rotation="0 90 0">
 						<a-text value="Easy" align="center" position="0 0 0.05" color="#8a0303"></a-text>
 					</a-box>
 
 					<!-- Medium Button -->
-					<a-box geometry="primitive: box; width: 1.5; height: 0.5; depth: 0.1" material="color: #000" position="2.5 38 12.5" class="button" rotation="0 90 0">
+					<a-box id="mediumButton" geometry="primitive: box; width: 1.5; height: 0.5; depth: 0.1" material="color: #000" position="2.5 38 12.5" class="button" rotation="0 90 0">
 						<a-text value="Medium" align="center" position="0 0 0.05" color="#8a0303"></a-text>
 					</a-box>
 
 					<!-- Hard Button -->
-					<a-box geometry="primitive: box; width: 1.5; height: 0.5; depth: 0.1" material="color: #000" position="2.5 38 10" class="button" rotation="0 90 0">
+					<a-box id="hardButton" geometry="primitive: box; width: 1.5; height: 0.5; depth: 0.1" material="color: #000" position="2.5 38 10" class="button" rotation="0 90 0">
 						<a-text value="Hard" align="center" position="0 0 0.05" color="#8a0303"></a-text>
 					</a-box>
 				</a-entity>

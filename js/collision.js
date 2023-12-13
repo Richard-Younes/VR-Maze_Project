@@ -120,13 +120,15 @@ let launchSound = document.querySelector('#launch');
 let burstSounds = [document.querySelector('#burst1'), document.querySelector('#burst2'), document.querySelector('#burst3')];
 let highscore = 9999999;
 let gameWon = false;
+
+let gameFlag = false;
 function winGame() {
 	let playerPosition = player.getAttribute('position');
 	if (Math.abs(playerPosition.x - trophyPosition.x) <= 1 && Math.abs(playerPosition.z - trophyPosition.z) <= 1) {
 		console.log('WIIIIIIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNNNNNNNNNNN');
 		arrived = true;
 		gameWon = true;
-
+		gameFlag = true;
 		if (highscore > counterValue) {
 			highscore = counterValue;
 			console.log(highscore);
@@ -138,14 +140,57 @@ function winGame() {
 		launchSound.play();
 		let burstSound = burstSounds[Math.floor(Math.random() * burstSounds.length)];
 		burstSound.play();
-
-		setTimeout(gameReset, 20000);
+		if (gameFlag) {
+			setTimeout(gameReset, 20000);
+			gameFlag = false;
+		}
 	}
 }
 // function animateFireworks() {
 // 	fireworks.setAttribute("particle-system", "preset: star; color: #FF0000, #FFFF00; particleCount: 10; size: 0.1; maxAge: 1");
 // 	requestAnimationFrame(animateFireworks);
 // }
+
+// Changing the value of the lives depending on the button pressed
+document.addEventListener('DOMContentLoaded', function () {
+	// Wait for the DOM to be ready
+
+	// Get references to the buttons
+	let easyButton = document.getElementById('easyButton');
+	let mediumButton = document.getElementById('mediumButton');
+	let hardButton = document.getElementById('hardButton');
+
+	// Add click event listeners to the buttons
+	easyButton.addEventListener('click', function () {
+		playerLives = 4;
+		livesDisplay.textContent = '';
+		console.log(playerLives);
+		for (let i = 0; i < playerLives; i++) {
+			livesDisplay.textContent += '❤️';
+		}
+	});
+
+	mediumButton.addEventListener('click', function () {
+		playerLives = 2;
+		livesDisplay.textContent = '';
+
+		console.log(playerLives);
+		for (let i = 0; i < playerLives; i++) {
+			livesDisplay.textContent += '❤️';
+		}
+	});
+
+	hardButton.addEventListener('click', function () {
+		playerLives = 1;
+		livesDisplay.textContent = '';
+
+		console.log(playerLives);
+
+		for (let i = 0; i < playerLives; i++) {
+			livesDisplay.textContent += '❤️';
+		}
+	});
+});
 
 // Reset the game
 
@@ -154,6 +199,14 @@ function gameReset() {
 	newGame.setAttribute('visible', true);
 	counterValue = 0;
 	counterDisplay.textContent = 'Time: ' + counterValue;
+	arrived = true;
+	playerLives = 4;
+	livesDisplay.textContent = '';
+
+	console.log(playerLives);
+	for (let i = 0; i < playerLives; i++) {
+		livesDisplay.textContent += '❤️';
+	}
 }
 
 // Set up the interval
