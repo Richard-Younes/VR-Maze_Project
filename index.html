@@ -18,7 +18,7 @@
 			// Simulate loading delay (you can replace this with your actual loading logic)
 			setTimeout(function () {
 				document.getElementById('loading-overlay').style.display = 'none';
-			}, 5000); // Replace 3000 with the actual loading time in milliseconds
+			}, 1000); // Replace 3000 with the actual loading time in milliseconds
 		</script>
 		<script>
 			// Function to restart the game
@@ -34,7 +34,7 @@
 	</head>
 
 	<body>
-		<div class="new-game">
+		<!-- <div class="new-game">
 			<h1 class="new-game-heading-one">Welcome to The MAze of Shadows</h1>
 			<p class="new-game-paragraph">
 				Prepare to embark on a chilling journey through the unknown. The Maze of Shadows awaits, shrouded in mystery and cloaked in darkness. Are you brave enough to navigate its twists and
@@ -59,6 +59,8 @@
 					</ul>
 				</li>
 
+
+
 				<li class="new-game-instructions--header">Difficulty Level:</li>
 				<li class="new-game-instructions--ul">
 					<ul>
@@ -76,6 +78,8 @@
 					</ul>
 				</li>
 			</ol>
+
+
 			<div class="difficulty-container">
 				<h2>Are you ready to face the Maze of Shadows?</h2>
 				<p>Choose your difficulty and step into the abyss.</p>
@@ -83,8 +87,7 @@
 				<button class="scary-button new-game-medium">Medium</button>
 				<button class="scary-button new-game-hard">Hard</button>
 			</div>
-		</div>
-
+		</div> -->
 		<div class="game-container">
 			<!-- Loading Overlay -->
 			<div id="loading-overlay">Loading...</div>
@@ -121,6 +124,77 @@
 				<!-- <a-entity rotation="-90 0 0 " position=" 5 20 5 ">
 				<a-camera></a-camera>
 			</a-entity> -->
+
+				<!----------------------- New game Or starter --------------------------------------->
+				<a-plane
+					static-body
+					color="#999 "
+					side="double "
+					position="100 35 -100 "
+					rotation="-90 0 0 "
+					width="300 "
+					height="300 "
+					src="./images/ground5.jpeg "
+					repeat="100 100 "
+					normal-map:
+					#normal-map-ground;
+					normal-texture-repeat:80
+					80;
+					static-body
+				></a-plane>
+				<a-plane static-body visible="false" rotation="-90 0 0 " position="100 38 -100 " width="300 " height="300 " depth="20 " rotation="0 0 0 "></a-plane>
+				<a-box position="0 38 15" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box position="0 38 10" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body>
+					<a-text class="new-game-atext" value="Difficulty Level:" position=" 2.5 2.4 0.8" align="center" color="red" scale="2 2 2" rotation="0 90 0"></a-text>
+					<a-text class="new-game-atext" value="Easy: For those new to the horrors that lie ahead." position=" 2.5 2 1" align="center" color="red" scale="1 1 1" rotation="0 90 0"></a-text>
+					<a-text class="new-game-atext" value="Medium: A moderate challenge for the daring." position=" 2.5 1.5 3.5" color="red" scale="1 1 1" rotation="0 90 0"></a-text>
+					<a-text class="new-game-atext" value="Hard: Only for the bravest souls." position=" 2.5 1 3.5" color="red" scale="1 1 1" rotation="0 90 0"></a-text>
+				</a-box>
+
+				<a-box position="0 38 5" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box position="5 38 5" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box position="10 38 5" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box position="15 38 15" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box position="15 38 10" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body>
+					<a-text class="new-game-atext" value="Instructions" position=" -2.5 2.4 2" align="center" color="red" scale="2 2 2" rotation="0 -90 0"></a-text>
+					<a-text class="new-game-atext" value="1- Controls:" position=" -2.5 2 1.8" align="center" color="red" scale="1.5 1.5 1.5" rotation="0 -90 0"></a-text>
+					<a-text class="new-game-atext" value="1.1- Use the VR headset to look around." position=" -2.5 1.5 1.2" color="red" scale="1 1 1" rotation="0 -90 0"></a-text>
+					<a-text
+						class="new-game-atext"
+						value="1.2- Navigate through the maze either by walking with a VR headset or using the Arrows/WASD controls on your keyboard."
+						position=" -2.5 1 1.2"
+						color="red"
+						scale="1 1 1"
+						rotation="0 -90 0"
+					></a-text>
+					<a-text class="new-game-atext" value="2- Objective:" position=" -2.5 0.3 1.8" align="center" color="red" scale="1.5 1.5 1.5" rotation="0 -90 0"></a-text>
+					<a-text
+						class="new-game-atext"
+						value="2.1- Your goal is to reach the elusive trophy hidden deep within the maze."
+						position=" -2.5 -0.2 1.2"
+						color="red"
+						scale="1 1 1"
+						rotation="0 -90 0"
+					></a-text>
+					<a-text class="new-game-atext" value="2.2- The clock is ticking, and time is your nemesis." position=" -2.5 -0.7 1.2" color="red" scale="1 1 1" rotation="0 -90 0"></a-text>
+				</a-box>
+				<a-box position="15 38 5" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box position="15 38 20" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box position="10 38 20" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-box position="5 38 20" width="5" height="5" depth="5" src="./images/walls4.jpeg" static-body> </a-box>
+				<a-text position="3 43 9" value="Welcome to The Maze of Shadows" scale="2.5 2.5 2.5" color="red" rotation="20 0 0"></a-text>
+
+				<a-text
+					position="7.2 41.5 9"
+					value="Prepare to embark on a chilling journey through the unknown. The Maze of Shadows awaits, shrouded in mystery and cloaked in darkness. Are you brave enough to navigate its twists and
+				turns?"
+					scale="1.75 1.75 1.75"
+					color="red"
+					align="center"
+					rotation="15 0 0"
+				></a-text>
+
+				<a-image src="./images/New game.jpg" width="11" height="5" position="8 38 8" rotation="0 0 0"></a-image>
 
 				<!-- Collision detector entity (invisible) -->
 				<a-box id="collision-detector" position="0 0 0" scale="0.1 0.1 0.1" visible="false" static-body collision-detector></a-box>
