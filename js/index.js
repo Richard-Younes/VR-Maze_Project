@@ -167,41 +167,14 @@ let sphere = document.getElementById('mySphere');
 let count = 0;
 // Animate the sphere's position
 
-// timer
-
-let counterValue = 0;
-const counterDisplay = document.getElementById('counterDisplay');
-let arrived = false;
-function updateCounter() {
-	if (!arrived) {
-		counterValue++;
-		counterDisplay.textContent = 'Time: ' + counterValue;
-
-		// Check if you've reached the end of the map, and clear the interval if necessary
-		if (counterValue >= mapEnd) {
-			clearInterval(intervalId);
-		}
-	}
-}
-
-function resetCounter() {
-	counterValue = 0;
-	counterDisplay.textContent = 'Time: ' + counterValue;
-}
-
-// Set the interval to update the counter every second (1000 milliseconds)
-
-// Set the end of the map value (change this to your actual end value)
-const mapEnd = Infinity; // Replace 10 with your actual end value
-window.intervalId = setInterval(updateCounter, 1000);
-AFRAME.registerComponent('stop-counter', {
-	init: function () {
-		this.el.addEventListener('click', function () {
-			console.log('GLTF model clicked');
-			clearInterval(window.intervalId);
-		});
-	},
-});
+// AFRAME.registerComponent('stop-counter', {
+// 	init: function () {
+// 		this.el.addEventListener('click', function () {
+// 			console.log('GLTF model clicked');
+// 			clearInterval(window.intervalId);
+// 		});
+// 	},
+// });
 
 function moveBoxes() {
 	// Remove the event listener to prevent multiple clicks

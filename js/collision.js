@@ -1,6 +1,34 @@
 /** @format */
 'Use strict';
 
+// timer
+
+let counterValue = 0;
+const counterDisplay = document.getElementById('counterDisplay');
+let arrived = true;
+function updateCounter() {
+	if (!arrived) {
+		counterValue++;
+		counterDisplay.textContent = 'Time: ' + counterValue;
+
+		// Check if you've reached the end of the map, and clear the interval if necessary
+		if (counterValue >= mapEnd) {
+			clearInterval(intervalId);
+		}
+	}
+}
+
+function resetCounter() {
+	counterValue = 0;
+	counterDisplay.textContent = 'Time: ' + counterValue;
+}
+
+// Set the interval to update the counter every second (1000 milliseconds)
+
+// Set the end of the map value (change this to your actual end value)
+const mapEnd = Infinity; // Replace 10 with your actual end value
+window.intervalId = setInterval(updateCounter, 1000);
+
 // The following is the lives part of the code
 let playerLives = 4;
 
@@ -62,3 +90,20 @@ function showGameOverScreen() {
 	document.querySelector('.game-container').style.display = 'none';
 	document.querySelector('.game-over').style.display = 'block';
 }
+
+// Collision with the ew game image
+
+const newGameImg = document.querySelector('.new-game-img');
+const newGame = document.getElementById('new-game');
+console.log(newGame);
+function checkCollisionNewGame() {
+	const playerPosition = player.getAttribute('position');
+	const imgCollision = newGameImg.getAttribute('position');
+
+	if (playerPosition.z - imgCollision.z <= 1 && playerPosition.y > 35) {
+		player.setAttribute('position', { x: 5, y: 39, z: 15 });
+		arrived = false;
+		newGame.remove();
+	}
+}
+setInterval(checkCollisionNewGame, 100); // Adjust the interval as needed
