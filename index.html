@@ -195,8 +195,6 @@
 				<a-box id="collision-detector" position="0 0 0" scale="0.1 0.1 0.1" visible="false" static-body collision-detector></a-box>
 
 				<a-entity class="player" id="player" camera universal-controls look-controls wasd-controls="acceleration:30" velocity="0 0 0" position="5 40 15" collidable kinematic-body>
-					<a-sound src="./Sound/Scary-music.mp3" autoplay="true" loop="true" volume="0.8"></a-sound>
-
 					<!-- Position of the trophy 85 2 -105 -->
 					<!-- position 5 40 15   acceleration:30 kinematic-body-->
 					<a-entity
@@ -216,7 +214,7 @@
                                 from: 1 1 1; to: 3 3 3"
 					>
 					</a-entity>
-
+					<a-sound id="scary-music" src="./Sound/Scary-music.mp3" autoplay="true" loop="true" volume="0.8"></a-sound>
 					<!-- <a-entity
 				sound="src: url(Sound/PinkPantherTheme.mp3); autoplay: true; loop:true; distanceModel:linear"
 			>

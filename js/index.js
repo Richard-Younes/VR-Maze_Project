@@ -210,7 +210,7 @@ function moveBoxes() {
 const player1 = document.getElementById('player');
 function trapDetection() {
 	const playerPosition = player1.getAttribute('position');
-	if (playerPosition.z >= -85 && playerPosition.z <= -82 && playerPosition.x <= 8 && playerPosition.x >= 5) {
+	if (playerPosition.z >= -85 && playerPosition.z <= -82 && playerPosition.x <= 10 && playerPosition.x >= 8) {
 		console.log('Trap Start');
 		moveBoxes();
 	}
@@ -244,4 +244,9 @@ function moveBoxes2() {
 
 	// Start moving boxes with a delay
 	moveBoxWithDelay(0);
+}
+let musicScary = document.getElementById('scary-music');
+function music() {
+	const playerPosition = player1.getAttribute('position');
+	musicScary.setAttribute('position', playerPosition);
 }
