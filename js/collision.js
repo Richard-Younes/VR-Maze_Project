@@ -122,6 +122,9 @@ let highscore = 9999999;
 let gameWon = false;
 
 let gameFlag = false;
+
+let musicScary = document.getElementById('scary-music');
+
 function winGame() {
 	let playerPosition = player.getAttribute('position');
 	if (Math.abs(playerPosition.x - trophyPosition.x) <= 1 && Math.abs(playerPosition.z - trophyPosition.z) <= 1) {
@@ -129,6 +132,8 @@ function winGame() {
 		arrived = true;
 		gameWon = true;
 		gameFlag = true;
+		musicScary.setAttribute('volume', 0);
+
 		if (highscore > counterValue) {
 			highscore = counterValue;
 			console.log(highscore);
@@ -202,6 +207,7 @@ function gameReset() {
 	arrived = true;
 	playerLives = 4;
 	livesDisplay.textContent = '';
+	musicScary.setAttribute('volume', 0);
 
 	console.log(playerLives);
 	for (let i = 0; i < playerLives; i++) {
