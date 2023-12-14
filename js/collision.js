@@ -1,15 +1,15 @@
 /** @format */
-"Use strict";
+'Use strict';
 
 // timer
 
 let counterValue = 0;
-const counterDisplay = document.getElementById("counterDisplay");
+const counterDisplay = document.getElementById('counterDisplay');
 let arrived = true;
 function updateCounter() {
 	if (!arrived) {
 		counterValue++;
-		counterDisplay.textContent = "Time: " + counterValue;
+		counterDisplay.textContent = 'Time: ' + counterValue;
 
 		// Check if you've reached the end of the map, and clear the interval if necessary
 		if (counterValue >= mapEnd) {
@@ -20,7 +20,7 @@ function updateCounter() {
 
 function resetCounter() {
 	counterValue = 0;
-	counterDisplay.textContent = "Time: " + counterValue;
+	counterDisplay.textContent = 'Time: ' + counterValue;
 }
 
 // Set the interval to update the counter every second (1000 milliseconds)
@@ -33,10 +33,10 @@ window.intervalId = setInterval(updateCounter, 1000);
 let playerLives = 4;
 
 console.log(document);
-let livesDisplay = document.getElementById("player-lives-display");
+let livesDisplay = document.getElementById('player-lives-display');
 
 for (let i = 0; i < playerLives; i++) {
-	livesDisplay.textContent += "❤️";
+	livesDisplay.textContent += '❤️';
 }
 
 console.log(playerLives);
@@ -44,41 +44,41 @@ console.log(playerLives);
 // *********************Handle the collision**********************************//
 
 // Get the player entity by its ID
-const player = document.getElementById("player");
+const player = document.getElementById('player');
 const beginPosition = { x: 5, y: 2.1, z: 10 }; // Set the new position values
-const ghosts = document.querySelectorAll(".ghost"); // Get all entities with the class 'ghost'
+const ghosts = document.querySelectorAll('.ghost'); // Get all entities with the class 'ghost'
 
 const margin = 0.8;
 
 function checkCollision() {
 	// Get the position of the player entity
-	const playerPosition = player.getAttribute("position");
+	const playerPosition = player.getAttribute('position');
 
 	// Iterate through all entities with the class 'ghost'
 	ghosts.forEach((ghost) => {
 		// Get the position of the current ghost entity
-		const ghostPosition = ghost.getAttribute("position");
+		const ghostPosition = ghost.getAttribute('position');
 
 		if (playerLives > 0) {
 			// Check for collision with the current ghost
 			if ((Math.abs(playerPosition.x - ghostPosition.x) <= margin && Math.abs(playerPosition.z - ghostPosition.z) <= margin) || playerPosition.y < 0) {
 				// Log the player position
-				console.log("Player Position:", playerPosition);
+				console.log('Player Position:', playerPosition);
 
 				// Log the ghost position
-				console.log("Ghost Position:", ghostPosition);
+				console.log('Ghost Position:', ghostPosition);
 
-				console.log("Collision");
+				console.log('Collision');
 				playerLives = playerLives - 1;
-				livesDisplay.textContent = "";
+				livesDisplay.textContent = '';
 				for (let i = 0; i < playerLives; i++) {
-					livesDisplay.textContent += "❤️";
+					livesDisplay.textContent += '❤️';
 				}
 				console.log(playerLives);
-				player.setAttribute("position", beginPosition);
+				player.setAttribute('position', beginPosition);
 			}
 		} else {
-			console.log("You Lost");
+			console.log('You Lost');
 			showGameOverScreen();
 		}
 	});
@@ -88,23 +88,23 @@ function checkCollision() {
 setInterval(checkCollision, 100); // Adjust the interval as needed
 
 function showGameOverScreen() {
-	document.querySelector(".game-container").style.display = "none";
-	document.querySelector(".game-over").style.display = "block";
+	document.querySelector('.game-container').style.display = 'none';
+	document.querySelector('.game-over').style.display = 'block';
 }
 
 // Collision with the new game image
 
-const newGameImg = document.querySelector(".new-game-img");
-const newGame = document.getElementById("new-game");
+const newGameImg = document.querySelector('.new-game-img');
+const newGame = document.getElementById('new-game');
 console.log(newGame);
 function checkCollisionNewGame() {
-	const playerPosition = player.getAttribute("position");
-	const imgCollision = newGameImg.getAttribute("position");
+	const playerPosition = player.getAttribute('position');
+	const imgCollision = newGameImg.getAttribute('position');
 
 	if (playerPosition.z - imgCollision.z <= 1.5 && playerPosition.y > 35) {
-		player.setAttribute("position", { x: 5, y: 30, z: 9 });
+		player.setAttribute('position', { x: 5, y: 30, z: 9 });
 		arrived = false;
-		newGame.setAttribute("visible", false);
+		newGame.setAttribute('visible', false);
 	}
 }
 setInterval(checkCollisionNewGame, 100); // Adjust the interval as needed
@@ -112,33 +112,33 @@ setInterval(checkCollisionNewGame, 100); // Adjust the interval as needed
 // Winnig condition
 // Collision With the trophy
 
-const trophy = document.querySelector(".trophy");
-const trophyPosition = trophy.getAttribute("position");
-const highscoreDisplay = document.getElementById("highscore");
-let fireworks = document.querySelector("#fireworks");
-let launchSound = document.querySelector("#launch");
-let burstSounds = [document.querySelector("#burst1"), document.querySelector("#burst2"), document.querySelector("#burst3")];
+const trophy = document.querySelector('.trophy');
+const trophyPosition = trophy.getAttribute('position');
+const highscoreDisplay = document.getElementById('highscore');
+let fireworks = document.querySelector('#fireworks');
+let launchSound = document.querySelector('#launch');
+let burstSounds = [document.querySelector('#burst1'), document.querySelector('#burst2'), document.querySelector('#burst3')];
 let highscore = 9999999;
 let gameWon = false;
 
 let gameFlag = false;
 
-let musicScary = document.getElementById("scary-music");
+let musicScary = document.getElementById('scary-music');
 
 function winGame() {
-	let playerPosition = player.getAttribute("position");
+	let playerPosition = player.getAttribute('position');
 	if (Math.abs(playerPosition.x - trophyPosition.x) <= 1 && Math.abs(playerPosition.z - trophyPosition.z) <= 1) {
-		console.log("WIIIIIIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNNNNNNNNNNN");
+		console.log('WIIIIIIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNNNNNNNNNNN');
 		arrived = true;
 		gameWon = true;
 		gameFlag = true;
-		musicScary.setAttribute("volume", 0);
+		musicScary.setAttribute('volume', 0);
 
 		if (highscore > counterValue) {
 			highscore = counterValue;
 			console.log(highscore);
 		}
-		highscoreDisplay.textContent = "Highscore: " + highscore;
+		highscoreDisplay.textContent = 'Highscore: ' + highscore;
 
 		// Fireworks
 
@@ -157,42 +157,42 @@ function winGame() {
 // }
 
 // Changing the value of the lives depending on the button pressed
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
 	// Wait for the DOM to be ready
 
 	// Get references to the buttons
-	let easyButton = document.getElementById("easyButton");
-	let mediumButton = document.getElementById("mediumButton");
-	let hardButton = document.getElementById("hardButton");
+	let easyButton = document.getElementById('easyButton');
+	let mediumButton = document.getElementById('mediumButton');
+	let hardButton = document.getElementById('hardButton');
 
 	// Add click event listeners to the buttons
-	easyButton.addEventListener("click", function () {
+	easyButton.addEventListener('click', function () {
 		playerLives = 4;
-		livesDisplay.textContent = "";
+		livesDisplay.textContent = '';
 		console.log(playerLives);
 		for (let i = 0; i < playerLives; i++) {
-			livesDisplay.textContent += "❤️";
+			livesDisplay.textContent += '❤️';
 		}
 	});
 
-	mediumButton.addEventListener("click", function () {
+	mediumButton.addEventListener('click', function () {
 		playerLives = 2;
-		livesDisplay.textContent = "";
+		livesDisplay.textContent = '';
 
 		console.log(playerLives);
 		for (let i = 0; i < playerLives; i++) {
-			livesDisplay.textContent += "❤️";
+			livesDisplay.textContent += '❤️';
 		}
 	});
 
-	hardButton.addEventListener("click", function () {
+	hardButton.addEventListener('click', function () {
 		playerLives = 1;
-		livesDisplay.textContent = "";
+		livesDisplay.textContent = '';
 
 		console.log(playerLives);
 
 		for (let i = 0; i < playerLives; i++) {
-			livesDisplay.textContent += "❤️";
+			livesDisplay.textContent += '❤️';
 		}
 	});
 });
@@ -200,18 +200,18 @@ document.addEventListener("DOMContentLoaded", function () {
 // Reset the game
 
 function gameReset() {
-	player.setAttribute("position", { x: 5, y: 38, z: 13 });
-	newGame.setAttribute("visible", true);
+	player.setAttribute('position', { x: 5, y: 38, z: 13 });
+	newGame.setAttribute('visible', true);
 	counterValue = 0;
-	counterDisplay.textContent = "Time: " + counterValue;
+	counterDisplay.textContent = 'Time: ' + counterValue;
 	arrived = true;
 	playerLives = 4;
-	livesDisplay.textContent = "";
-	musicScary.setAttribute("volume", 1);
+	livesDisplay.textContent = '';
+	musicScary.setAttribute('volume', 1);
 
 	console.log(playerLives);
 	for (let i = 0; i < playerLives; i++) {
-		livesDisplay.textContent += "❤️";
+		livesDisplay.textContent += '❤️';
 	}
 }
 
