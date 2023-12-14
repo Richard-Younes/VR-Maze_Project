@@ -245,8 +245,8 @@ function moveBoxes2() {
 	// Start moving boxes with a delay
 	moveBoxWithDelay(0);
 }
-let musicScary = document.getElementById('scary-music');
+let musicScary1 = document.getElementById('scary-music');
 function music() {
 	const playerPosition = player1.getAttribute('position');
-	musicScary.setAttribute('position', playerPosition);
+	musicScary1.setAttribute('position', playerPosition);
 }
