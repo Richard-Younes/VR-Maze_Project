@@ -61,7 +61,7 @@ function checkCollision() {
 
 		if (playerLives > 0) {
 			// Check for collision with the current ghost
-			if (Math.abs(playerPosition.x - ghostPosition.x) <= margin && Math.abs(playerPosition.z - ghostPosition.z) <= margin) {
+			if ((Math.abs(playerPosition.x - ghostPosition.x) <= margin && Math.abs(playerPosition.z - ghostPosition.z) <= margin) || playerPosition.y < 0) {
 				// Log the player position
 				console.log('Player Position:', playerPosition);
 

@@ -51,7 +51,7 @@
 	align-items: center;
 	justify-content: center;
 	z-index: 9999;
-	animation: changeBackground 10s infinite; /* Adjust duration as needed */
+	animation: changeBackground 20s infinite; /* Adjust duration as needed */
 }
 
 @keyframes changeBackground {
