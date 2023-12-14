@@ -210,7 +210,7 @@ function moveBoxes() {
 const player1 = document.getElementById('player');
 function trapDetection() {
 	const playerPosition = player1.getAttribute('position');
-	if (playerPosition.z >= -85 && playerPosition.z <= -82 && playerPosition.x <= 7 && playerPosition.x >= 2) {
+	if (playerPosition.z >= -85 && playerPosition.z <= -82 && playerPosition.x <= 8 && playerPosition.x >= 5) {
 		console.log('Trap Start');
 		moveBoxes();
 	}
