@@ -250,3 +250,4 @@ function music() {
 	const playerPosition = player1.getAttribute('position');
 	musicScary.setAttribute('position', playerPosition);
 }
+setInterval(music, 100);
